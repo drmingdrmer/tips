@@ -1,7 +1,3 @@
-# tips
-collection of useful or useless tech tips
-
-
 ## 使用正太分布近似计算组合数
 
 因为二项式分布可以近似为正太分布, 所以组合数C(n,m)可以用正态的函数直接来近似, 有时临时预估算个工程的量级啥的,
