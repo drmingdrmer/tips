@@ -9,7 +9,7 @@ collection of useful or useless tech tips
 没用的知识get √
 
 
-![](assets/binomial-normal.png)
+![](no-category/assets/binomial-normal.png)
 
 ```python
 import math
