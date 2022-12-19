@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "01245237610f2577",
+    "type": "split",
+    "children": [
+      {
+        "id": "0c62626a566524f1",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "tips/approx-combination.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "af5162aa9b383756",
+    "type": "split",
+    "children": [
+      {
+        "id": "6a2627f0da540e43",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "018f02fb2cc30e61",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "fa3f0a7df8c53493",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e5746e952b51ff58",
+    "type": "split",
+    "children": [
+      {
+        "id": "2e4e4f29b25d54a4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9fde0a28c9dd2acd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "tips/approx-combination.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "0c62626a566524f1",
+  "lastOpenFiles": [
+    "tips/approx-combination.md"
+  ]
+}
