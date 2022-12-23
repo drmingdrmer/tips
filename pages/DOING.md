@@ -1,2 +1,4 @@
 - Read PR: feat: try to improve object storage io read https://github.com/datafuselabs/databend/pull/9335/files
 -
+- 纠删码? https://note.xuanwo.io/#/page/%E7%BA%A0%E5%88%A0%E7%A0%81
+-
