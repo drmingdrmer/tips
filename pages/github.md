@@ -1,0 +1,2 @@
+- Creates GitHub releases for pushed tags, with the commit log as release body https://github.com/fregante/release-with-changelog
+-

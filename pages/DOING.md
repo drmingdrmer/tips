@@ -1,0 +1,3 @@
+- PR chore(logging): disabled debug log to stderr for sled  https://github.com/datafuselabs/databend/pull/9350
+- Read PR: feat: try to improve object storage io read https://github.com/datafuselabs/databend/pull/9335/files
+-

@@ -1,0 +1,5 @@
+- search by function signature: https://roogle.hkmatsumoto.com/
+- chrome-extension:  https://rust.extension.sh/
+-
+-
+-

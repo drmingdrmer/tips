@@ -1,0 +1,54 @@
+<script>
+    var container = document.getElementById('main-content-container');
+    container.style['flex-wrap'] = 'wrap';
+    container.firstChild.style['flex-basis'] = '100%';
+    var element = document.createElement('div');
+    element.classList.add('giscus');
+    container.appendChild(element);
+</script>
+<script src="https://giscus.app/client.js"
+        data-repo="drmingdrmer/tips"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkzMjkyMDY2Mjk="
+        data-category="giscus"
+        data-category-id="DIC_kwDOE59LZc4CTOkF"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
+<script>
+    history.pushState = (f => function pushState() {
+        var ret = f.apply(this, arguments);
+        window.dispatchEvent(new Event('pushstate'));
+        window.dispatchEvent(new Event('locationchange'));
+        return ret;
+    })(history.pushState);
+    history.replaceState = (f => function replaceState() {
+        var ret = f.apply(this, arguments);
+        window.dispatchEvent(new Event('replacestate'));
+        window.dispatchEvent(new Event('locationchange'));
+        return ret;
+    })(history.replaceState);
+    window.addEventListener('popstate', () => {
+        window.dispatchEvent(new Event('locationchange'))
+    });
+    window.addEventListener('locationchange', function () {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        const title = decodeURIComponent(location.hash.split('/').slice(-1)[0]);
+        console.debug("location change to:", title, iframe);
+        if (!iframe || !title) return;
+        iframe.contentWindow.postMessage({
+            giscus: {
+                setConfig: {
+                    term: title
+                }
+            }
+        }, 'https://giscus.app');
+        console.debug("try refresh giscus:", title);
+    }, false);
+</script>
