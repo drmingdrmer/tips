@@ -1,0 +1,109 @@
+/**
+ * This file is managed manually by Webfont app.
+ * Steps:
+ *  - download the zip from Webfont app
+ *  - get the tabler-icons-extension.woff2 and replace the one in fonts/tabler-icons-extension.woff2
+ *  - update the tie-xxx css rules
+ */
+
+@font-face {
+  font-family: 'tabler-icons-extension';
+  src: url('../fonts/tabler-icons-extension.woff2?mxgthk') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+}
+
+.tie {
+  display: inline-block;
+  font-family: "tabler-icons-extension" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  vertical-align: -.125em;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.tie-app-feature::before {
+  content: "\ea01";
+}
+
+.tie-block::before {
+  content: "\ea02";
+}
+
+.tie-block-search::before {
+  content: "\ea03";
+}
+
+.tie-connector::before {
+  content: "\ea04";
+}
+
+.tie-h-auto::before {
+  content: "\ea05";
+}
+
+.tie-heading-off::before {
+  content: "\ea06";
+}
+
+.tie-new-block::before {
+  content: "\ea07";
+}
+
+.tie-new-page::before {
+  content: "\ea08";
+}
+
+.tie-new-whiteboard::before {
+  content: "\ea09";
+}
+
+.tie-new-whiteboard-element::before {
+  content: "\ea0a";
+}
+
+.tie-object-compact::before {
+  content: "\ea0b";
+}
+
+.tie-object-expanded::before {
+  content: "\ea0c";
+}
+
+.tie-page::before {
+  content: "\ea0d";
+}
+
+.tie-page-search::before {
+  content: "\ea0e";
+}
+
+.tie-references-hide::before {
+  content: "\ea0f";
+}
+
+.tie-references-show::before {
+  content: "\ea10";
+}
+
+.tie-select-cursor::before {
+  content: "\ea11";
+}
+
+.tie-text::before {
+  content: "\ea12";
+}
+
+.tie-whiteboard::before {
+  content: "\ea13";
+}
+
+.tie-whiteboard-element::before {
+  content: "\ea14";
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<head><meta charset="utf-8" /><meta content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" name="viewport" /><link href="static/css/tabler-icons.min.css" rel="stylesheet" type="text/css" /><link href="static/css/style.css" rel="stylesheet" type="text/css" /><link href="static/css/export.css" rel="stylesheet" type="text/css" /><link href="static/img/logo.png" rel="shortcut icon" type="image/png" /><link href="static/img/logo.png" rel="shortcut icon" sizes="192x192" /><link href="static/img/logo.png" rel="apple-touch-icon" /><meta name="apple-mobile-web-app-title" /><meta content="yes" name="apple-mobile-web-app-capable" /><meta content="yes" name="apple-touch-fullscreen" /><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" /><meta content="yes" name="mobile-web-app-capable" /><meta property="og:title" /><meta content="site" property="og:type" /><meta content="static/img/logo.png" property="og:image" /><meta property="og:description" /><title></title><meta property="og:site_name" /><meta /></head><body><div id="root"></div><script>window.logseq_db="[logseq____&quot;~#logseq____&apos;logseq____&quot;,null]"</script><script>window.logseq_state="{:ui/theme \"light\", :ui/sidebar-collapsed-blocks {}, :ui/show-recent? false, :config {\"local\" {:shortcuts {}, :default-templates {:journals \"\"}, :query/views {:pprint (fn [r] [:pre.code (pprint r)])}, :macros {}, :shortcut/doc-mode-enter-for-new-block? false, :favorites [], :ui/show-empty-bullets? false, :file/name-format :triple-lowbar, :preferred-workflow :now, :ref/default-open-blocks-level 2, :feature/enable-block-timestamps? false, :start-of-week 6, :ref/linked-references-collapsed-threshold 50, :outliner/block-title-collapse-enabled? false, :commands [], :meta/version 1, :hidden [], :default-queries {:journals [{:title \"🔨 NOW\", :query [:find (pull ?h [*]) :in $ ?start ?today :where [?h :block/marker ?marker] [(contains? #{\"NOW\" \"DOING\"} ?marker)] [?h :block/page ?p] [?p :block/journal? true] [?p :block/journal-day ?d] [(>= ?d ?start)] [(<= ?d ?today)]], :inputs [:14d :today], :result-transform (fn [result] (sort-by (fn [h] (get h :block/priority \"Z\")) result)), :collapsed? false} {:title \"📅 NEXT\", :query [:find (pull ?h [*]) :in $ ?start ?next :where [?h :block/marker ?marker] [(contains? #{\"NOW\" \"LATER\" \"TODO\"} ?marker)] [?h :block/page ?p] [?p :block/journal? true] [?p :block/journal-day ?d] [(> ?d ?start)] [(< ?d ?next)]], :inputs [:today :7d-after], :collapsed? false}]}, :ui/enable-tooltip? true, :query/result-transforms {:sort-by-priority (fn [result] (sort-by (fn [h] (get h :block/priority \"Z\")) result))}, :property-pages/enabled? true, :block/content-max-length 10000, :ui/show-command-doc? true, :feature/enable-search-remove-accents? true}}}"</script><script type="text/javascript">// Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+      // ----------------------------------------------------------------------
+      // This script checks to see if a redirect is present in the query string
+      // and converts it back into the correct url and adds it to the
+      // browser's history using window.history.replaceState(...),
+      // which won't cause the browser to attempt to load the new url.
+      // When the single page app is loaded further down in this file,
+      // the correct url will be waiting in the browser's history for
+      // the single page app to route accordingly.
+      (function(l) {
+        if (l.search) {
+          var q = {};
+          l.search.slice(1).split('&').forEach(function(v) {
+            var a = v.split('=');
+            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+          });
+          if (q.p !== undefined) {
+            window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + (q.p || '') +
+              (q.q ? ('?' + q.q) : '') +
+              l.hash
+            );
+          }
+        }
+      }(window.location))</script><script src="static/js/main.js"></script><script src="static/js/highlight.min.js"></script><script src="static/js/interact.min.js"></script><script src="static/js/katex.min.js"></script><script src="static/js/code-editor.js"></script></body>
