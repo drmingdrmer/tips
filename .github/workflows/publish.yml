@@ -34,7 +34,7 @@ jobs:
         run: sed -i "s@</body>@$( cat scripts/comments.html | tr '\n' ' ' | sed 's@&@\\&@g' )</body>@"  www/index.html
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: www
