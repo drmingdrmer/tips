@@ -6,6 +6,7 @@
 	  CLOCK: [2022-12-23 Fri 10:30:02]--[2022-12-23 Fri 10:30:07] =>  00:00:05
 	  :END:
 	- LATER [[thread local]]
+- Reading: [[reading]]
 - **All Tips:**
 	- 使用正态分布近似计算组合数: [[approx-combination]]
 	- [[语言改变命运]]

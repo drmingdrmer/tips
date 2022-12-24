@@ -1,4 +1,10 @@
 - Read PR: feat: try to improve object storage io read https://github.com/datafuselabs/databend/pull/9335/files
 -
 - 纠删码? https://note.xuanwo.io/#/page/%E7%BA%A0%E5%88%A0%E7%A0%81
+- Using a docker image to run a program? md2zhihu? ref: https://github.com/pengx17/logseq-publish
+-
+- 围观: A tutorial of building an LSM-Tree storage engine in a week! (WIP) : https://github.com/skyzh/mini-lsm #read
+-
+-
+-
 -
