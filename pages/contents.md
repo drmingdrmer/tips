@@ -1,14 +1,28 @@
+- I'm Zhang Yanpo. Friends just call me XP.
+- Source code of this site(XP's tips): https://github.com/drmingdrmer/tips
+- XP's blog: https://blog.openacid.com/
+-
 - **Today's Tip:**  {{embed [[approx-combination]] }}
-- **TODO:**
-	- DONE [[approx-combination]]
-	  :LOGBOOK:
-	  CLOCK: [2022-12-23 Fri 10:30:00]--[2022-12-23 Fri 10:30:01] =>  00:00:01
-	  CLOCK: [2022-12-23 Fri 10:30:02]--[2022-12-23 Fri 10:30:07] =>  00:00:05
-	  :END:
-	- LATER [[thread local]]
-- Reading: [[reading]]
-- **All Tips:**
-	- 使用正态分布近似计算组合数: [[approx-combination]]
-	- [[语言改变命运]]
+- [[DOING]]
+- {{query LATER }}
+  query-sort-by:: block
+  query-table:: true
+  query-sort-desc:: true
+- [[reading]]
+- {{query #read }}
+  query-table:: true
+	-
+- **Topics:**
+  query-table:: true
+	- [[github]]
+	- [[github-actions]]
+	- [[logseq-resrouce]]
+	- [[mdbook]]
+	- [[online-drawing]]
+	- [[rust-search-engine]]
+	- [[vercel]]
+	- [[web-testing]]
 - **Tips by Categories**: {{query #math }}
   query-table:: true
+- [[playground]]
+- [[Tips]]

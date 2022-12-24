@@ -1,0 +1,6 @@
+- tldraw https://www.tldraw.com/
+	- ✅ use locally with vscode plugin.
+	- 😐️ can not export from CLI.
+- excalidraw https://excalidraw.com/
+	- ✅ use locally with vscode plugin.
+	- ✅ `*.excalidraw.png` can be used for both editing and publishing!!!
