@@ -297,4 +297,7 @@
  ;;     ;use Percent-encoding for other invalid characters
  :file/name-format :triple-lowbar
  :publishing/all-pages-public? true
+ :feature/enable-timetracking? true
+ ;; :default-home {:page "Contents", :sidebar "Contents"}
+ :default-home {:page "Contents"}
  }
