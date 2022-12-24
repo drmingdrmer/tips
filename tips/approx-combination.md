@@ -3,12 +3,12 @@
 tags: #binomial-distribution #normal-distribution #approximation #math
 
 [二项式分布](https://zh.wikipedia.org/wiki/%E4%BA%8C%E9%A0%85%E5%BC%8F%E5%88%86%E5%B8%83)可以近似为[正态分布](https://zh.wikipedia.org/wiki/%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83), 所以组合数 `C(n, m)` 也可以用正态来近似计算,
-我用这种方法在工程设计阶段做快速的数值估算, 还挺方便的🤔:
+我用这种方法在工程设计阶段做快速的数值估算, 挺方便的:
 
 例如要计算12 盘 [RAID-6](https://zh.wikipedia.org/wiki/RAID) 的数据丢失风险(2块冗余盘所以掉3盘会丢数据:`C(12, 3)`),
 或设计hash table时估算一个bucket中刚好存储了`i`个key的概率: $p(i) = {n \choose i} ( \frac{1}{b} )^{ i } ( 1 - \frac{1}{b} )^{n-i}$(`n`是key总数, `b`是bucket总数)
 
-![](approx-combination/binomial-normal-margin.png)
+![foo](../assets/approx-combination/binomial-normal-margin.png)
 
 ```python
 import math
@@ -34,7 +34,7 @@ print("accurate, approximated:")
 print(combi(n, m), '%.3f' % approx_combi(n, m))
 ```
 
-[approx-combination.py](approx-combination/approx-combination.py)
+[approx-combination.py](../assets/approx-combination/approx-combination.py)
 
 Output:
 

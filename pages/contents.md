@@ -9,7 +9,5 @@
 - **All Tips:**
 	- 使用正态分布近似计算组合数: [[approx-combination]]
 	- [[语言改变命运]]
-- Test: add image
-	- ![image.png](../assets/image_1671801791545_0.png)
 - **Tips by Categories**: {{query #math }}
   query-table:: true
