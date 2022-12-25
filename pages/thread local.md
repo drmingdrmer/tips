@@ -1,3 +1,0 @@
-- In rust, attr thread local `#[thread_local]` does not call drop for it.
--
--

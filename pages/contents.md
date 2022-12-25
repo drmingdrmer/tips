@@ -2,7 +2,7 @@
 - Source code of this site(XP's tips): https://github.com/drmingdrmer/tips
 - XP's blog: https://blog.openacid.com/
 -
-- **Today's Tip:**  {{embed [[approx-combination]] }}
+- **Today's Tip:** {{embed [[rust-thread-local-drop]] }}
 - [[DOING]]
 - {{query LATER }}
   query-sort-by:: block
@@ -18,15 +18,15 @@
   query-table:: true
 	- [[github]]
 	- [[github-actions]]
+	- [[hash]]
 	- [[logseq-resrouce]]
 	- [[markdown-editor]]
+	- [[math]]
 	- [[mdbook]]
 	- [[online-drawing]]
 	- [[rust-programming]]
 	- [[rust-search-engine]]
 	- [[vercel]]
 	- [[web-testing]]
-- **Tips by Categories**: {{query #math }}
-  query-table:: true
 - [[playground]]
 - [[Tips]]
