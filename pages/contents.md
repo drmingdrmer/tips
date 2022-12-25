@@ -11,14 +11,18 @@
 - [[reading]]
 - {{query #read }}
   query-table:: true
+  query-sort-by:: block
+  query-sort-desc:: false
 	-
 - **Topics:**
   query-table:: true
 	- [[github]]
 	- [[github-actions]]
 	- [[logseq-resrouce]]
+	- [[markdown-editor]]
 	- [[mdbook]]
 	- [[online-drawing]]
+	- [[rust-programming]]
 	- [[rust-search-engine]]
 	- [[vercel]]
 	- [[web-testing]]

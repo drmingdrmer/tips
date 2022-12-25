@@ -1,0 +1,6 @@
+- typora
+	- ✅ auto save image locally
+	- ✅ paste html and convert to markdown
+- logseq
+- obsidian
+- joplin

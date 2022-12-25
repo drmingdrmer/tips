@@ -1,3 +1,3 @@
 # tips
 
-Collection of xp's tips.
+XP's tips collection: https://drmingdrmer.github.io/tips/
