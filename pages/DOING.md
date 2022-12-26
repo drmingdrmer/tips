@@ -8,7 +8,13 @@
 - rust:ssl: affected by env:  https://github.com/datafuselabs/openraft/issues/550
 - openraft issue 617 to doc
 - openraft: rocksdb example: flush is quick, unlike sled. why?
-- rust-thread-local-drop: publish: mp
 -
+- mp TODO
+	- remove title
+	- remove tag
+	- add id card
+	- add cover
+	- add source link
+	- add footer qrcode
 -
 -

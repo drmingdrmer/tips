@@ -17,5 +17,6 @@
 		  </style>
 		  ```
 		- remove tags
+		- `![](../assets/openacid/qrcode-hori.jpg)`
 - ⌨️ Key shortcuts:
 	- move up/down:`cmd-shift-up/down`
