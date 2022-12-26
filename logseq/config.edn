@@ -299,5 +299,5 @@
  :publishing/all-pages-public? true
  :feature/enable-timetracking? true
  ;; :default-home {:page "Contents", :sidebar "Contents"}
- :default-home {:page "Contents"}
+ :default-home {:page "Today's tip", :sidebar "Contents"}
  }

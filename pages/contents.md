@@ -2,7 +2,8 @@
 - Source code of this site(XP's tips): https://github.com/drmingdrmer/tips
 - XP's blog: https://blog.openacid.com/
 -
-- **Today's Tip:** {{embed [[rust-thread-local-drop]] }}
+- [[Today's tip]]
+-
 - [[DOING]]
 - {{query LATER }}
   query-sort-by:: block
