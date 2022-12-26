@@ -8,6 +8,8 @@ Rust 中有2种方法声明 [thread-local](https://en.wikipedia.org/wiki/Thread-
 
 [Online Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=998357c6308a37ea4a53300843d38fae)
 
+[thread_local_macro_drop.rs](../rust-playground/src/bin/thread_local_macro_drop.rs)
+
 ```rust
 struct Foo(usize);
 impl Drop for Foo {
@@ -35,6 +37,7 @@ fn main() {
 
 [Online Playground](https://play.rust-lang.org/?version=nightly&mode=debug&edition=2021&gist=a419e002b5b8d462dde9ceea93dc6e7f)
 
+[thread_local_attr_not_dropped.rs](../rust-playground/src/bin/thread_local_attr_not_dropped.rs)
 
 ```rust
 #![feature(thread_local)]
