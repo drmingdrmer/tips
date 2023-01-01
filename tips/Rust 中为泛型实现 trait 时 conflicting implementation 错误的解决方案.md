@@ -8,7 +8,8 @@ conflicting implementations of trait `Str` for type `std::option::Option<&_>`
    | ------------------------------ first implementation here
 ...
 17 | impl<T: Str> Str for Option<&T> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `std::option::Option<&_>`
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+            conflicting implementation for `std::option::Option<&_>`
 ```
 
 **问题**: 假设我需要一个将 `T` 转成字符串的功能, 定义在一个 trait 里: `trait Str { fn to_str(&self) -> String }` , 并已经给一些常用类型, 例如 `u64` 实现了这个`trait`:
