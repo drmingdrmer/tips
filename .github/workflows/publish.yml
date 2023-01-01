@@ -23,6 +23,7 @@ jobs:
         uses: pengx17/logseq-publish@main
         with:
           dest: www
+          # disable building a trace.zip
           trace: false
 
       - name: add a nojekyll file
@@ -40,3 +41,5 @@ jobs:
           branch: gh-pages
           folder: www
           clean: true
+          # do not keep built branch history
+          single-commit: true
