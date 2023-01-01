@@ -1,2 +1,2 @@
-- {{embed [[rust-thread-local-drop]] }}
+- {{embed [[Rust 中为泛型实现 trait 时 conflicting implementation 错误的解决方案]] }}
 - **All Tips**: [[Tips]]
