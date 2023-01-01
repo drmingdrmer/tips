@@ -23,6 +23,7 @@ jobs:
         uses: pengx17/logseq-publish@main
         with:
           dest: www
+          trace: false
 
       - name: add a nojekyll file
         # to make sure asset paths are correctly identified
