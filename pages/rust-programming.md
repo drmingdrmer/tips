@@ -1,2 +1,1 @@
-- Rust 中 `#[thread_local]` 的drop方法不被调用 [[rust-thread-local-drop]]
 - What's unwind-safe?

@@ -1,4 +1,5 @@
-tags: #rust #trait #generic #trait-conflict
+tags:: tips, rust-programming, trait, generic, trait-conflict
+
 
 ```
 error[E0119]:

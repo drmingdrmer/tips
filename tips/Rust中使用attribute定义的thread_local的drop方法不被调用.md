@@ -1,6 +1,5 @@
-## Rust 中 `#[thread_local]` 的drop方法不被调用
+tags:: tips, rust-programming, thread-local, drop, trap
 
-tags: #rust #thread-local #drop #trap
 
 Rust 中有2种方法声明 [thread-local](https://en.wikipedia.org/wiki/Thread-local_storage) 变量: 使用标准库的宏 [`thread_local!{}`](https://doc.rust-lang.org/std/macro.thread_local.html) 或使用 attribute [`#[thread_local]`](https://doc.rust-lang.org/beta/unstable-book/language-features/thread-local.html), 这里有个不**rust**的地方, `#[thread_local]` 按官方说法是被"translates directly to the `thread_local` attribute in LLVM", 线程销毁时不会调用它的`drop`方法, 但宏声明的thread-local变量没问题:
 

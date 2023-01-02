@@ -1,4 +1,3 @@
-- 使用正态分布近似计算组合数 [[approx-combination]]
 - TODO:
 	- hyperloglog
 	- catalan number: https://en.wikipedia.org/wiki/Catalan_number
