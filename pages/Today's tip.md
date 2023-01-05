@@ -1,2 +1,2 @@
-- {{embed [[Rust 中为泛型实现 trait 时 conflicting implementation 错误的解决方案]] }}
+- {{embed [[Rust 中引用旧版本的代码]] }}
 - **All Tips**: [[Tips]]
