@@ -1,0 +1,26 @@
+tags:: math, latex
+
+- $\forall x \in [-\infty,\infty]$
+- $\forall x \in \mathbb{R}$
+- $A \in B$ element of
+- $A \sub B \subset C \subseteq D$ subset
+- $\overline{A}$ complement(set), overline
+- $A \centernot\implies B$, $A \;\not\!\!\!\implies B$ not imply
+- $A \implies B$ implies
+- $A \leftrightarrow B$
+- $A \iff B$ iff, if and only if
+- $A \equiv B$ equivalent
+- $\vec{A}$ vector
+- $A \land B$ , $A \and B$ logic and
+- $A \cap B$ cap, intersection
+- $A \cup B$ cup, union
+- $A \ge B$ greater than or equal
+- $A \perp B$ perpendicular 垂直的, 直角的
+- $A \!\! B$ : `\!`: insert a negative thin space
+- $n \choose k$, $\binom{n}{k}$  combination number,  binomial coefficient
+- **Set**
+	- $\{x | p(x)\}$ $\{x : p(x)\}$ $\{x ; p(x)\}$
+	- $\{x \in A | p(x) \}$
+- Reference:
+	- https://en.wikipedia.org/wiki/List_of_logic_symbols
+	- https://www.geeksforgeeks.org/equality-and-inference-symbols-in-latex/
