@@ -23,14 +23,12 @@ We choose the second one because it gives: $C_0 = \lim_{x \to 0} g(x) = 1$
 The square root term is expanded as following, where $\frac{1}{2} \choose n$ is [Newton's generalized binomial theorem](https://en.wikipedia.org/wiki/Binomial_theorem#Newton's_generalized_binomial_theorem).
 
 $$
-\sqrt{1+y} =
-1
-+ {\frac{1}{2} \choose 1} y
-+ {\frac{1}{2} \choose 2} y^2
-+ {\frac{1}{2} \choose 3} y^3
-...
+\sqrt{1+y} = 1
++{\frac{1}{2} \choose 1} y
++{\frac{1}{2} \choose 2} y^2
++{\frac{1}{2} \choose 3} y^3
++...
 $$
-
 
 
 So we have:
