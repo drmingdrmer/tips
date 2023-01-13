@@ -1,3 +1,5 @@
+tags:: math, math-combinatorics
+
 [generating function](https://en.wikipedia.org/wiki/Generating_function) :
 
 $$

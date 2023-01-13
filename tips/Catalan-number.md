@@ -1,3 +1,5 @@
+tags:: math, math-combinatorics
+
 [Catalan number](https://en.wikipedia.org/wiki/Catalan_number) satisfies **recurrence relation**:
 
 $$
@@ -15,4 +17,4 @@ $$
 C_n = \frac{1}{n+1} {2n \choose n}
 $$
 
-[Catalan-number proof: generating function](./Catalan-number%20proof:%20generating%20function.md)
+- [Catalan-number proof: generating function](./Catalan-number%20proof:%20generating%20function.md)
