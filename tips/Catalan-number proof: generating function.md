@@ -46,27 +46,33 @@ $$
 <details>
 <summary>proof:</summary>
 
-${\frac{1}{2} \choose i} =
+$$
+{\frac{1}{2} \choose i} =
 \frac{
 \frac{1}{2}
 \frac{-1}{2}
 \frac{-3}{2}
 \frac{-5}{2}
 ...
-\frac{1-2i+2}{2} }{ i! }$
+\frac{1-2i+2}{2} }{ i! }
+$$
 
-${\frac{1}{2} \choose i} =
+$$
+{\frac{1}{2} \choose i} =
 2^{-i}
 (-1)^{i+1}
 1 \times 3 \times 5 .. (2i-3)
-\frac{ 1 } { i! }$
+\frac{ 1 } { i! }
+$$
 
 
-${\frac{1}{2} \choose i} =
+$$
+{\frac{1}{2} \choose i} =
 2^{-i}
 (-1)^{i+1}
 (2i-3)!!
-\frac{ 1 } { i! }$
+\frac{ 1 } { i! }
+$$
 
 $\because (2n)! = 2^n n! (2n-1)!!$
 
