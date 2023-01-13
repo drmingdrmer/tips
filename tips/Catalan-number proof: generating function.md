@@ -32,6 +32,7 @@ $$
 
 
 So we have:
+
 $$
 \sqrt{1-4x} = \sum_{i=0}{\frac{1}{2} \choose i} (-1) ^ i 4^i x^i \tag{exp}
 $$
@@ -52,11 +53,7 @@ ${\frac{1}{2} \choose i} =
 \frac{-3}{2}
 \frac{-5}{2}
 ...
-\frac{1-2i+2}{2}
-}{
-i!
-}
-$
+\frac{1-2i+2}{2} }{ i! }$
 
 ${\frac{1}{2} \choose i} =
 2^{-i}
