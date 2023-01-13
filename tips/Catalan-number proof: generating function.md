@@ -1,7 +1,16 @@
 [generating function](https://en.wikipedia.org/wiki/Generating_function) :
-$g(x) = \sum_{i=0}^{\infty} C_i x^i$
 
-From recurrence relation $C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}$, we have:
+$$
+g(x) = \sum_{i=0}^{\infty} C_i x^i
+$$
+
+From recurrence relation
+
+$$
+C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}
+$$
+
+We have:
 
 $$
 g = 1 + x {g(x)}^2
@@ -37,14 +46,7 @@ $$
 \sqrt{1-4x} = \sum_{i=0}{\frac{1}{2} \choose i} (-1) ^ i 4^i x^i \tag{exp}
 $$
 
-Replace the generalized binomial coefficient with:
-
-$$
-{\frac{1}{2} \choose i} = 4^{-i} (-1)^{i+1} { 2i \choose i } \frac{1}{2i-1}
-$$
-
-<details>
-<summary>proof:</summary>
+And we already know(where `!!` is [double factorial](https://en.wikipedia.org/wiki/Double_factorial)):
 
 $$
 {\frac{1}{2} \choose i} =
@@ -55,42 +57,37 @@ $$
 \frac{-5}{2}
 ...
 \frac{1-2i+2}{2} }{ i! }
-$$
-
-$$
-{\frac{1}{2} \choose i} =
-2^{-i}
-(-1)^{i+1}
-1 \times 3 \times 5 .. (2i-3)
-\frac{ 1 } { i! }
-$$
-
-
-$$
-{\frac{1}{2} \choose i} =
-2^{-i}
+= 2^{-i}
 (-1)^{i+1}
 (2i-3)!!
 \frac{ 1 } { i! }
+\tag{gen-bin}
 $$
 
-$\because (2n)! = 2^n n! (2n-1)!!$
+And we already know:
 
-$\therefore {\frac{1}{2} \choose i} = 4^{-i} (-1)^{i+1} \frac{ (2i)! }{ (2i-1) i! }$
+$$
+(2n)! = 2^n n! (2n-1)!!
+\tag{even-fac}
+$$
 
-$\therefore {\frac{1}{2} \choose i} = 4^{-i} (-1)^{i+1} { 2i \choose i } \frac{1}{2i-1}$
+From (gen-bin) and (even-fac), we have:
 
-</details>
+$$
+{\frac{1}{2} \choose i} = 4^{-i} (-1)^{i+1} { 2i \choose i } \frac{1}{2i-1}
+\tag{gen-bin-2}
+$$
 
-We have:
+From (exp) and (gen-bin-2) we have:
 
 $$
 \sqrt{1-4x}
 = - \sum_{i=0}\frac{1}{2i-1} { 2i \choose i} x^i
+\tag{sqrt-series}
 $$
 
 
-Therefore:
+Therefore, with (sqrt-series) we have:
 
 
 $$
@@ -103,7 +100,7 @@ $$
 g(x) = \sum_{j=0} \frac{1}{j+1} {2j \choose j} x^i
 $$
 
-Finally:
+Finally, the coefficient of $x^i$:
 
 $$
 C_n = \frac{1}{n+1} {2n \choose n}
