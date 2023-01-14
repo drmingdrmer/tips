@@ -10,14 +10,26 @@ tags:: latex, cheatsheet
 - $A \leftrightarrow B$
 - $A \iff B$ iff, if and only if
 - $A \equiv B$ equivalent
+- $p \approx q$ $p \thickapprox q$ `\approx` and `\thickapprox`
 - $\vec{A}$ vector
 - $A \land B$ , $A \and B$ logic and
 - $A \cap B$ cap, intersection
 - $A \cup B$ cup, union
 - $A \ge B$ greater than or equal
 - $A \perp B$ perpendicular 垂直的, 直角的
-- $A \!\! B$ : `\!`: insert a negative thin space
 - $n \choose k$, $\binom{n}{k}$  combination number,  binomial coefficient
+- **Spacing**
+	- $A \quad B$ `\quad` quadratone, 空格
+	- $A \!\! B$ : `\!`: insert a negative thin space
+- **Other**
+	- $\because A \therefore B$ `\because` and `\therefore`
+	- $A \text{and} B$ `\text{foo}` add literal text 任意文字
+	-
+	- $$f(x) = 1 \tag{2.34} \label{foo}$$
+	  $$ \eqref{name} $$
+	  `\tag{text}`: Manually add equation number 加标号
+	  `\label{name}` add reference label 加引用标记
+	  `\eqref{name}` 引用一个label
 - **Set**
 	- $\{x | p(x)\}$ $\{x : p(x)\}$ $\{x ; p(x)\}$
 	- $\{x \in A | p(x) \}$

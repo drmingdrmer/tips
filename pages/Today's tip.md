@@ -1,2 +1,2 @@
-- {{embed [[Rust 中引用旧版本的代码]] }}
+- {{embed [[n节点的binary-tree的个数]] }}
 - **All Tips**: [[Tips]]
