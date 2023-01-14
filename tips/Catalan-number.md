@@ -11,7 +11,7 @@ C_{n+1} = \sum_{i=0}^{n} C_i C_{n-i}
 \tag{reccurrence}
 $$
 
-And its general term formula is(${2n \choose n}$ is [binomial-coefficient](https://en.wikipedia.org/wiki/Binomial_coefficient) ):
+And its general term formula is( ${2n \choose n}$ is [binomial-coefficient](https://en.wikipedia.org/wiki/Binomial_coefficient) ):
 
 $$
 C_n = \frac{1}{n+1} {2n \choose n}
