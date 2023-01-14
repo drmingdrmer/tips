@@ -1,8 +1,8 @@
 tags:: math, math-combinatorics, catalan-number, binary-tree
 
 
-假设有n个节点 binary-tree 共有$C_n$种,
-对于所有左右子树分别是i个节点和n-i个节点的 binary-tree, 共有$C_{i} \times C_{n-i}$种.
+假设有n个节点 binary-tree 共有 $C_n$ 种,
+对于所有左右子树分别是i个节点和n-i个节点的 binary-tree, 共有 $C_{i} \times C_{n-i}$ 种.
 
 ![](../assets/binary-tree-count/t.excalidraw.png)
 
