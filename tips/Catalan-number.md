@@ -20,7 +20,7 @@ $$
 
 ## Proofs
 
-- [Catalan-number proof: generating function](./Catalan-number%20proof:%20generating%20function.md)
+- [Catalan-number proof: generating function](./catalan-number-proof-generating-function.md)
 
 
 ## Application
