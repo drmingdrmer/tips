@@ -1,2 +1,2 @@
-- {{embed [[n节点的binary-tree的个数]] }}
+- {{embed [[n 节点 binary-tree 的个数]] }}
 - **All Tips**: [[Tips]]

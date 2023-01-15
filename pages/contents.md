@@ -17,17 +17,24 @@
 	-
 - **Topics:**
   query-table:: true
+	- [[distributed-system]]
 	- [[github]]
 	- [[github-actions]]
 	- [[hash]]
+	- [[latex]]
 	- [[logseq-resrouce]]
 	- [[markdown-editor]]
 	- [[math]]
+	- [[math-combinatorics]]
 	- [[mdbook]]
 	- [[online-drawing]]
+	- [[rust-useful-crate]]
 	- [[rust-programming]]
 	- [[rust-search-engine]]
+	- [[utils]]
 	- [[vercel]]
 	- [[web-testing]]
 - [[playground]]
 - [[Tips]]
+- [[Friends]]
+-

@@ -1,4 +1,3 @@
-title:: Rust 中引用旧版本的代码
 tags:: tips, rust-programming, cargo
 
 软件有升级时, 需要提供一个升级程序, 读旧数据, 转换, 写入新格式的数据.

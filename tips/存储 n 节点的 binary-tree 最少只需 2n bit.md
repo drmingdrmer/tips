@@ -1,9 +1,8 @@
-title:: 存储 n 节点的 binary-tree 最少只需 2n bit
 tags:: tips, math, math-combinatorics, catalan-number, binary-tree
 
 
 **原理**:
-[n 节点 binary-tree 的个数](./binary-tree-count.md) 有 $C_n = \frac{1}{n+1} {2n \choose n}$ 个,
+[n 节点 binary-tree 的个数](./n%20节点%20binary-tree%20的个数.md) 有 $C_n = \frac{1}{n+1} {2n \choose n}$ 个,
 那么最节省空间的存储 binary-tree 的方法就是:
 **枚举所有 n 个节点的 binary-tree, 然后只存储 binary-tree 的编号**.
 因此表示编号所需的 bit 数, 就是存储一个 binary-tree 的理论上最小的空间开销, 即:

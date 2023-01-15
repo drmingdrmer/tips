@@ -1,4 +1,3 @@
-title:: Catalan number proof: generating function
 tags:: tips, math, math-combinatorics, proof
 
 [generating function](https://en.wikipedia.org/wiki/Generating_function) :

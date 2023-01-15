@@ -1,4 +1,3 @@
-title:: latex cheatsheet
 tags:: cheatsheet, latex
 
 - $\forall x \in [-\infty,\infty]$

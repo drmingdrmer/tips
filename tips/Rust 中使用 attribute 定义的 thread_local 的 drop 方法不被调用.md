@@ -1,4 +1,3 @@
-title:: Rust 中使用 attribute 定义的 thread_local 的 drop 方法不被调用
 tags:: tips, rust-programming, thread-local, drop, trap
 
 

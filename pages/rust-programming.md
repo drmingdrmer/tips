@@ -1,1 +1,2 @@
 - What's unwind-safe?
+- list enabled features when compiling: `cargo  tree -e features`

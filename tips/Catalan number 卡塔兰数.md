@@ -1,4 +1,3 @@
-title:: Catalan number 卡塔兰数
 tags:: tips, math, math-combinatorics
 
 [Catalan number](https://en.wikipedia.org/wiki/Catalan_number) satisfies **recurrence relation**:
@@ -20,11 +19,11 @@ $$
 
 ## Proofs
 
-- [Catalan-number proof: generating function](./catalan-number-proof-generating-function.md)
+- [Catalan-number proof: generating function](./Catalan%20number%20proof:%20generating%20function.md)
 
 
 ## Application
 
 - The count of different [binary-tree](https://en.wikipedia.org/wiki/Binary_tree) of exactly `n` nodes is $C_n$:
-    [n节点的binary-tree的个数](./binary-tree-count.md)
+    [n节点的binary-tree的个数](./n%20节点%20binary-tree%20的个数.md)
 

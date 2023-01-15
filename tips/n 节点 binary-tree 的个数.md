@@ -1,4 +1,3 @@
-title:: n 节点 binary-tree 的个数
 tags:: tips, math, math-combinatorics, catalan-number, binary-tree
 
 
@@ -9,7 +8,7 @@ tags:: tips, math, math-combinatorics, catalan-number, binary-tree
 
 于是得到递推式: $C_{n+1} = C_0 C_{n} + C_1 C_{n-1} + ... + C_n C_0$
 
-符合这个递推式的一定是一个 [Catalan-number](./Catalan-number.md), 👈 文中给出了 Catalan 的通项公式为:
+符合这个递推式的一定是一个 [Catalan-number](./Catalan%20number%20卡塔兰数.md), 👈 文中给出了 Catalan 的通项公式为:
 
 $$
 C_n = \frac{1}{n+1} {2n \choose n}
