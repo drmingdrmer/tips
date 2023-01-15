@@ -1,6 +1,5 @@
 title:: n 节点 binary-tree 的个数
-type:: [[Tips]]
-tags:: math, math-combinatorics, catalan-number, binary-tree
+tags:: tips, math, math-combinatorics, catalan-number, binary-tree
 
 
 假设有n个节点 binary-tree 共有 $C_n$ 种,

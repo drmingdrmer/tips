@@ -1,6 +1,5 @@
 title:: 存储一个 binary-tree 所需的最小空间
-type:: [[Tips]]
-tags:: math, math-combinatorics, catalan-number, binary-tree
+tags:: tips, math, math-combinatorics, catalan-number, binary-tree
 
 **应用**: 既然n个节点的 binary-tree 的数量是确定的, 那么我们就可以给每个tree编号,
 并通过存储编号来存储一个tree.
