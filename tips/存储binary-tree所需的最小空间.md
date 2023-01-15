@@ -1,3 +1,4 @@
+title:: 存储一个 binary-tree 所需的最小空间
 type:: [[Tips]]
 tags:: math, math-combinatorics, catalan-number, binary-tree
 

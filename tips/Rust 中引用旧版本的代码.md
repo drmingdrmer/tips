@@ -1,3 +1,4 @@
+title:: Rust 中引用旧版本的代码
 type:: [[Tips]]
 tags:: rust-programming, cargo
 
