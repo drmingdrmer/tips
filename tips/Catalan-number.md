@@ -26,5 +26,5 @@ $$
 ## Application
 
 - The count of different [binary-tree](https://en.wikipedia.org/wiki/Binary_tree) of exactly `n` nodes is $C_n$:
-    [n节点的binary-tree的个数](./n节点的binary-tree的个数.md)
+    [n节点的binary-tree的个数](./binary-tree-count.md)
 
