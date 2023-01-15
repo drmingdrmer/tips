@@ -1,4 +1,5 @@
-tags:: tips, rust-programming, cargo
+type:: [[Tips]]
+tags:: rust-programming, cargo
 
 软件有升级时, 需要提供一个升级程序, 读旧数据, 转换, 写入新格式的数据.
 所以要求它的代码中同时使用新旧两个版本的代码,

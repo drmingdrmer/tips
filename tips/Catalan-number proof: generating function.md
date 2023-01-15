@@ -1,4 +1,6 @@
-tags:: math, math-combinatorics
+title:: Catalan number proof: generating function
+type:: [[Tips]]
+tags:: math, math-combinatorics, proof
 
 [generating function](https://en.wikipedia.org/wiki/Generating_function) :
 

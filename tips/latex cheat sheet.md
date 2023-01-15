@@ -1,4 +1,6 @@
-tags:: latex, cheatsheet
+title:: latex cheatsheet
+type:: [[Cheatsheet]]
+tags:: latex
 
 - $\forall x \in [-\infty,\infty]$
 - $\forall x \in \mathbb{R}$

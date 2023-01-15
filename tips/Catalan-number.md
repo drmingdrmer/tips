@@ -1,3 +1,5 @@
+title:: Catalan number 卡塔兰数
+type:: [[Tips]]
 tags:: math, math-combinatorics
 
 [Catalan number](https://en.wikipedia.org/wiki/Catalan_number) satisfies **recurrence relation**:

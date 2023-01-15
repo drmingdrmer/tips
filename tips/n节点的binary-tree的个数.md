@@ -1,3 +1,5 @@
+title:: n 节点 binary-tree 的个数
+type:: [[Tips]]
 tags:: math, math-combinatorics, catalan-number, binary-tree
 
 

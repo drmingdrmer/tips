@@ -1,4 +1,5 @@
-tags:: tips, rust-programming, trait, generic, trait-conflict
+type:: [[Tips]]
+tags:: rust-programming, trait, generic, trait-conflict
 
 
 ```
