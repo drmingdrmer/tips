@@ -17,7 +17,9 @@
 	-
 - **Topics:**
   query-table:: true
+	- [[bash]]
 	- [[distributed-system]]
+	- [[c-programming]]
 	- [[github]]
 	- [[github-actions]]
 	- [[hash]]

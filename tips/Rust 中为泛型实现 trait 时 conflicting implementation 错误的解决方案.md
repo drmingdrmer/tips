@@ -1,4 +1,4 @@
-tags:: tiops, rust-programming, trait, generic, trait-conflict
+tags:: tips, rust-programming, trait, generic, trait-conflict
 
 
 ```
