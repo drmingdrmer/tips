@@ -1,2 +1,3 @@
 - What's unwind-safe?
 - list enabled features when compiling: `cargo  tree -e features`
+- skip boundary check; Informs the optimizer that a condition is always true. https://doc.rust-lang.org/core/intrinsics/fn.assume.html
