@@ -1,4 +1,7 @@
 - TODO:
 	- hyperloglog
 	- catalan number: https://en.wikipedia.org/wiki/Catalan_number
--
+- https://en.wikipedia.org/wiki/Directed_acyclic_graph
+- https://en.m.wikipedia.org/wiki/Weak_ordering
+- https://en.wikipedia.org/wiki/Space-filling_curve
+	- https://en.wikipedia.org/wiki/Z-order_curve
