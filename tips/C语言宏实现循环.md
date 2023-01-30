@@ -1,5 +1,8 @@
 tags:: tips, c-programming, macro, preprocessor, loop, for
 
+It is well explained in:
+https://github.com/swansontec/map-macro
+
 C 语言里如果需要对多个 error-code 实现类似的错误处理,
 可以借助宏 [preprocessor](https://en.wikipedia.org/wiki/C_preprocessor) 
 来实现重复代码的生成.
