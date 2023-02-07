@@ -18,6 +18,15 @@ tags:: cheatsheet, latex
 - $A \ge B$ greater than or equal
 - $A \perp B$ perpendicular 垂直的, 直角的
 - $n \choose k$, $\binom{n}{k}$  combination number,  binomial coefficient
+- $\sum_{n=1}^{\infty}$ `\sum_{n=1}^{\infty}` sum 求和
+- $$
+  \begin{cases}
+  x       & = v1 \\
+  x+y+z   & = v4 \\
+  x+2y+4z & = v5
+  \end{cases}
+  $$
+  equation system `\begin{case}` `&` for align
 - **Spacing**
 	- $A \quad B$ `\quad` quadratone, 空格
 	- $A \!\! B$ : `\!`: insert a negative thin space
