@@ -4,6 +4,7 @@
 	- #install `npm install -g markdown-link-check`
 	- `find . -name \*.md -print0 | xargs -0 -n1 markdown-link-check -c config.json`
 	- `<!-- markdown-link-check-disable -->` disables markdown link check
+	  github-action: https://github.com/gaurav-nelson/github-action-markdown-link-check
 - **dashmap**
   DashMap is an implementation of a concurrent associative array/hashmap in Rust.
   https://docs.rs/dashmap/latest/dashmap/
@@ -41,6 +42,55 @@
   A high performance concurrent caching library for Rust
   https://github.com/moka-rs/moka
 - **pyo3**:
-  https://pyo3.rs/v0.18.0/
+  https://pyo3.rs/v0.18.0
+- **zellij**:
+  Pluggable terminal workspace, with terminal multiplexer as the base feature
+  #install `brea install zellij`
+	- c-s e: scroll back editing
+	- `zrf ls`: run command in a pane
+	- c-p e: embed floating pane
+	- **doc**: https://zellij.dev/documentation/zellij-edit.html
+	- Sample layout
+	  ```
+	  // Usage:
+	  //   zellij action new-tab --layout 3m1q.kdl
+	  //   zellij --layout 3m1q.kdl
+	  layout {
+	  
+	      tab name="foo" {
+	          // tab-bar
+	          pane size=1 borderless=true {
+	              plugin location="zellij:tab-bar"
+	          }
+	  
+	          pane split_direction="vertical" {
+	              pane split_direction="horizontal" {
+	                  pane {
+	                      command "bash"
+	                      args "-c" "./target/debug/databend-query -c xp-ben/config/query-1.toml --internal-enable-sandbox-tenant"
+	                      start_suspended true
+	                  }
+	                  // pane
+	              }
+	              pane split_direction="horizontal" {
+	                  pane  {
+	                      command "bash"
+	                      args "-c" "./target/debug/databend-meta -c xp-ben/config/meta-1.toml"
+	                  }
+	                  pane {
+	                      command "bash"
+	                      args "-c" "./target/debug/databend-meta -c xp-ben/config/meta-2.toml"
+	                  }
+	              }
+	          }
+	      }
+	  
+	      // status-bar
+	      pane size=2 borderless=true {
+	          plugin location="zellij:status-bar"
+	      }
+	  }
+	  
+	  ```
 -
 - emoji for everyone: https://github.com/twitter/twemoji
