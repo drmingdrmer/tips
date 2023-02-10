@@ -1,6 +1,6 @@
 tags:: tips, rust-programming, toolchaine, nightly, stable
 
-使用环境变量 `RUSTUP_TOOLCHAIN`
+使用 `rustc --version`
 ```rust
 // build.rs
 fn main() {
@@ -21,7 +21,7 @@ fn main() {
 }
 ```
 
-使用 `rustc --version`
+使用环境变量 `RUSTUP_TOOLCHAIN`
 ```rust
 // build.rs
 fn main() {
