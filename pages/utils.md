@@ -93,4 +93,9 @@
 	  
 	  ```
 -
+- **hyper**
+  terminal
+  #install `brew install hyper`
+	- Cmd-2 does not work. cmdIsMeta/altIsMeta does not work.
 - emoji for everyone: https://github.com/twitter/twemoji
+-
