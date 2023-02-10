@@ -4,6 +4,7 @@ tags:: tips, rust-programming, toolchaine, nightly, stable
 ```rust
 // build.rs
 fn main() {
+    // Copied from anyhow
     let rustc = env::var_os("RUSTC").unwrap();
     let output = Command::new(rustc).arg("--version").output().unwrap();
     let version = str::from_utf8(&output.stdout).unwrap();

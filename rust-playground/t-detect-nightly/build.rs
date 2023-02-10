@@ -19,7 +19,7 @@ fn main() {
         // do nothing
     } else if rust_toolchain.starts_with("nightly") {
         //enable the 'nightly-features' feature flag
-        println!("cargo:rustc-cfg=feature=\"bar_nightly\"");
+        println!("cargo:rustc-cfg=feature=\"env_nightly\"");
     } else {
         panic!("Unexpected value for rustc toolchain")
     }
