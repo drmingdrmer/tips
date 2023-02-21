@@ -8,6 +8,8 @@ https://github.com/rust-lang/rust/pull/107894
 - Combined cond https://godbolt.org/z/7Es3avoYn
 - Split cond https://godbolt.org/z/nhxoKcW3z
 
+- Diff Asm of the last two: https://godbolt.org/z/arcsxcEc5
+
 优化点:
 
 - `child + 1 < v.len()` 是一个非常可预期的判断, 大部分情况为 `true`;
