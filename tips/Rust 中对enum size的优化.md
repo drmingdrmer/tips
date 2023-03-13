@@ -1,4 +1,4 @@
-tags:: tips, rust-programming, enum, memory
+tags:: tips, rust-programming, enum, memory, null-pointer
 
 `enum` 的内存大小一般是它最大的 variant 的大小, 加上一个 `tag` 的大小,
 tag 是 enum 内部用于区分当前是哪个 variant. 因为 tag 需要参与计算 enum 的内存对齐,
