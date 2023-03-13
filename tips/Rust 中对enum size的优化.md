@@ -52,5 +52,5 @@ enum Arc_ArcDyn {
 }
 ```
 
-
+演示代码见:
 [enum-size.rs](../rust-playground/src/bin/enum-size.rs)
