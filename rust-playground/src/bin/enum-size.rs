@@ -45,6 +45,22 @@ enum Blank_Arc_ArcDyn {
     ArcDyn(Arc<dyn Trait>),
 }
 
+// 8 bytes
+struct WithNiche {
+    fill1: u32,
+    fill2: u16,
+    fill3: u8,
+    niche: bool,
+}
+
+// 8 bytes, using the value 2-255 in the last byte in `WithNiche` as tag.
+enum Enum {
+    NicheContainingVariant(WithNiche),
+    B4bytes(u32),
+    C4bytes(f32),
+    D6bytes([u16;3]),
+}
+
 fn main() {
     println!("Arc<dyn Trait>                       : {}", size_of::<Arc<dyn Trait>>());
     println!("Arc<T>                               : {}", size_of::<Arc<i32>>());
@@ -55,5 +71,8 @@ fn main() {
     println!("enum{{Arc<T>, Arc<dyn Trait>}}         : {}", size_of::<Arc_ArcDyn>());
     println!("enum{{Arc<dyn Trait>, Arc<dyn Trait>}} : {}", size_of::<ArcDyn_ArcDyn>());
     println!("enum{{Blank, Arc<T>, Arc<dyn Trait>}}  : {}", size_of::<Blank_Arc_ArcDyn>());
+
+    println!("WithNiche  : {}", size_of::<WithNiche>());
+    println!("Enum  : {}", size_of::<Enum>());
 
 }

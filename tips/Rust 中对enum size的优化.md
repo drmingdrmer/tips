@@ -52,5 +52,25 @@ enum Arc_ArcDyn {
 }
 ```
 
+第3个例子, 使用某段没被使用的 bits 作为 niche, 作为 enum 的 tag.
+
+```rust
+// 8 bytes
+struct WithNiche {
+    fill1: u32,
+    fill2: u16,
+    fill3: u8,
+    niche: bool,
+}
+
+// 8 bytes, using the value 2-255 in the last byte in `WithNiche` as tag.
+enum Enum {
+    NicheContainingVariant(WithNiche),
+    B4bytes(u32),
+    C4bytes(f32),
+    D6bytes([u16;3]),
+}
+```
+
 演示代码见:
 [enum-size.rs](../rust-playground/src/bin/enum-size.rs)
