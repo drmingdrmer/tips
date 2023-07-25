@@ -1,2 +1,2 @@
-- {{embed [[Tokio 中 hang 死所有 worker 的方法]] }}
+- {{embed [[Rust 遇到泛型参数手动 reborrow mut ref]] }}
 - **All Tips**: [[Tips]]
