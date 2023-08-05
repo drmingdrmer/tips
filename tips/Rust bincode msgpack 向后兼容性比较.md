@@ -41,6 +41,9 @@ https://docs.rs/bincode/2.0.0-rc.3/bincode/serde/index.html#known-issues
 > **Using any of the above attributes can and will cause issues with bincode and
 > will result in lost data**. Consider using bincode’s own derive macro instead.
 
+Databend 存储层的 metadata 因为兼容性问题已经从 bincode 切换到 msgpack:
+https://github.com/datafuselabs/databend/pull/11592
+
 ### 其他序列化库的 benchmark
 
 这些也包含在了: [完整的benchmark](https://github.com/djkoloski/rust_serialization_benchmark)
