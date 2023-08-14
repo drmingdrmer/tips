@@ -1,7 +1,11 @@
 tags:: tips, rust-programming, async, future, stream
 
-用来创建Stream/Sink的工具分散在各个crate里,
+用来创建 Stream/Sink 的工具分散在各个 crate 里,
 `futures::stream`, `tokio_stream`, `tokio_util` ...
+
+以及另外2个基于宏的, 用于创建或消费 Stream 的 crate:
+- `async_stream` https://docs.rs/async-stream/latest/async_stream/
+- `futures_async_stream` https://docs.rs/futures-async-stream/latest/futures_async_stream/
 
 
 ## crate `futures::stream`
@@ -110,7 +114,9 @@ https://docs.rs/tokio-util/0.7.8/tokio_util/codec/index.html
 use futures_util::StreamExt;
 use tokio_util::codec::{FramedRead, LinesCodec};
 
-let mut framed = FramedRead::new(tokio::io::stdin(), LinesCodec::new());
+let mut framed = FramedRead::new(
+                    tokio::io::stdin(),
+                    LinesCodec::new());
 
 while let Some(line) = framed.next().await {
     println!("{:?}", line);
@@ -118,14 +124,58 @@ while let Some(line) = framed.next().await {
 ```
 
 
-### `tokio_util::sync` 将 `mpsc::Sender` 转成 `Sink`
+### `tokio_util::sync`
 
 https://docs.rs/tokio-util/latest/tokio_util/sync/index.html
 
+将 `mpsc::Sender` 转成 `Sink`:
+
+- `PollSender`                     A wrapper around mpsc::Sender that can be polled.
+
+Semaphore:
+
+- `PollSemaphore`                  A wrapper around Semaphore that provides a poll_acquire method.
+
+Other:
+
 - `CancellationToken`              A token which can be used to signal a cancellation request to one or more tasks.
 - `DropGuard`                      A wrapper for cancellation token which automatically cancels it on drop. It is created using drop_guard method on the CancellationToken.
-- `PollSemaphore`                  A wrapper around Semaphore that provides a poll_acquire method.
-- `PollSender`                     A wrapper around mpsc::Sender that can be polled.
 - `ReusableBoxFuture`              A reusable `Pin<Box<dyn Future<Output = T> + Send + 'a>>`.
 - `WaitForCancellationFuture`      A Future that is resolved once the corresponding CancellationToken is cancelled.
 - `WaitForCancellationFutureOwned` A Future that is resolved once the corresponding CancellationToken is cancelled.
+
+
+## crate `async_stream`
+
+https://docs.rs/async-stream/latest/async_stream/
+
+```rust
+let s = stream! {
+    for i in 0..3 {
+        yield i;
+    }
+};
+
+pin_mut!(s); // needed for iteration
+
+while let Some(value) = s.next().await {
+    println!("got {}", value);
+}
+```
+
+
+## crate `futures_async_stream`
+
+https://docs.rs/futures-async-stream/latest/futures_async_stream/
+
+```rust
+// Returns a stream of i32
+#[stream(item = i32)]
+async fn foo(stream: impl Stream<Item = String>) {
+    // `for_await` is built into `stream`. If you use `for_await` only in `stream`, there is no need to import `for_await`.
+    #[for_await]
+    for x in stream {
+        yield x.parse().unwrap();
+    }
+}
+```
