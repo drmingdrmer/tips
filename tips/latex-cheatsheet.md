@@ -15,6 +15,7 @@ tags:: cheatsheet, latex
 - $A \land B$ , $A \and B$ logic and
 - $A \cap B$ cap, intersection
 - $A \cup B$ cup, union
+- $A \setminus B$ setminus diff
 - $A \ge B$ greater than or equal
 - $A \perp B$ perpendicular 垂直的, 直角的
 - $n \choose k$, $\binom{n}{k}$  combination number,  binomial coefficient
