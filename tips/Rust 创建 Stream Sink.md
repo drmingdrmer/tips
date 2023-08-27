@@ -1,5 +1,8 @@
 tags:: tips, rust-programming, async, future, stream
 
+Rust 中 `Stream` 可以看做一个 `async` 的, 可以从中一个一个读取数据的流,
+而 `Sink` 可以看做是 `Stream` 的写入端.
+
 用来创建 Stream/Sink 的工具分散在各个 crate 里,
 `futures::stream`, `tokio_stream`, `tokio_util` ...
 
