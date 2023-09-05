@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Logseq Publish
         # Using main branch to reproduce https://github.com/pengx17/logseq-publish/issues/8
