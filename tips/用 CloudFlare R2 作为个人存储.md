@@ -144,10 +144,42 @@ aws s3 cp s3://movie-xp/Gran-Torino-2008-老爷车.rmvb ./
 `aws s3` 提供日常使用方便的命令,  `aws s3api` 提供底层命令. 
 
 
+## GUI: Cyberduck
+
+下载cyberduck:
+https://cyberduck.io/
+
+从这个页面
+https://docs.cyberduck.io/protocols/s3/cloudflare/
+
+下载 R2 的 profile, 
+https://profiles.cyberduck.io/Cloudflare%20R2%20Storage%20(S3).cyberduckprofile
+
+双击安装, 以使cyberduck支持R2.
+
+然后 open connection, 服务类型选新添加的R2, 填入 access key,  secret key,
+`endpoint_url`.
+**注意**: `endpoint_url` 填写时一定要去掉 `https://` 头,
+否则cyberduck会把类型强制成webdav.
+
+然后就可以用了.
+
+目前看 cyberduck 最好用, 没什么问题.
+
+好处是支持创建目录, 创建目录时会创建一个 slash 结尾的空文件.
+
+```
+aws s3 ls s3://movie-xp
+                           PRE foo/
+                           PRE 双城之战-中文版/
+
+aws s3 ls s3://movie-xp/foo
+                           PRE foo/
+```
+
 ## GUI: Commander One
 
-试了下 [Commander One][] 还不错(cyber duck中配置一个自定义`endpoint_url`会把服务强制为webdav,
-导致无法使用R2(只能使用aws原始域名, 不知哪里配置错了));
+试了下 [Commander One][] 还不错
 
 
 然后从菜单 Commander One - Connection Manager中创建一个到R2的链接:
