@@ -20,6 +20,7 @@
 	- [[assembly]]
 	- [[algorithm-vector-index]]
 	- [[bash]]
+	- [[daily]]
 	- [[distributed-system]]
 	- [[cache]]
 	- [[c-programming]]
@@ -49,6 +50,7 @@
 	- [[utils]]
 	- [[vercel]]
 	- [[web-testing]]
+	- [[日常]] // == daily
 	- [[乱写的]]
 - [[playground]]
 - [[Tips]]
