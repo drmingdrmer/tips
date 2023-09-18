@@ -3,7 +3,7 @@ tags:: tips, rust-programming, rust-lifetime, rust-borrow, mutable, reference
 以前用过的所有语言, 脑子里有个大致思路后开始码, 最后肯定能把思路码出来不会出现意外.
 但写Rust后经常遇到某个符合(粗糙的)直觉的思路在Rust里无法实现的情况...
 
-[mut-ref-to-ref](../rust-playground/src/bin/mut-ref-to-ref-require-lifetime-constraint.rs)
+[mut-ref-to-ref.rs](../rust-playground/src/bin/mut-ref-to-ref-require-lifetime-constraint.rs)
 
 例如下面的代码中,
 想分别从结构体 Ref 和 RefMut 中拿出 `&T`,

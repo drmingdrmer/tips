@@ -7,7 +7,7 @@ Rust 中如果一个 struct 有一个泛型参数为 Fn 类型, 且这个 Fn 也
 用lifetime约束再去检查时就会出现问题: 本该是互相约束的lifetime(Fut的和F的),
 变成了不同的lifetime.
 
-[fail](../rust-playground/src/bin/async-fn-as-generic.rs)
+[fail.rs](../rust-playground/src/bin/async-fn-as-generic.rs)
 
 ```rust
 use std::future::Future;
