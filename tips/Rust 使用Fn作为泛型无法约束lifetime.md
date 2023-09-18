@@ -1,4 +1,4 @@
-tags:: tips, rust-programming, generic, lifetime
+tags:: tips, rust-programming, generic, rust-lifetime
 
 Rust 中如果一个 struct 有一个泛型参数为 Fn 类型, 且这个 Fn 也返回一个泛型类型,
 且跟Fn的参数有 lifetime 的约数, 那么是无法编译成功的.

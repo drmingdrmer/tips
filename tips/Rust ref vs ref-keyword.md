@@ -1,4 +1,4 @@
-tags:: tips, rust-programming, ref, borrow, pattern
+tags:: tips, rust-programming, ref, rust-borrow, pattern
 
 在 Rust 的 pattern match 中, 使用`ref` 来创建引用, 可以减小引用的 scope,
 从而解决一些直接使用`& foo` 无法解决的问题, 例如 `can not borrow mutable twice` 的问题.

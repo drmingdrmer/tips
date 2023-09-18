@@ -1,4 +1,4 @@
-tags:: tips, rust-programming, generic, reborrow, borrow-of-moved
+tags:: tips, rust-programming, generic, rust-borrow, reborrow, borrow-of-moved
 
 Rust 编译器会尽量自动对形如 `write(v: &mut Foo)` 的调用进行参数的 **reborrow**: `&mut *v`, 来创建一个临时的 `&mut Foo`，以允许多次调用。但当遇到泛型时，Rust 默认将 `&mut Foo` 直接 move 给目标函数，因此可能导致 `borrow of moved value` 的错误。
 
