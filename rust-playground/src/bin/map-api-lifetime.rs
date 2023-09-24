@@ -16,20 +16,54 @@ pub struct Level {
 }
 
 #[derive(Debug)]
-struct Writable<'d> {
+pub struct Writable<'d> {
     writable: &'d mut Level,
 }
 
 #[derive(Debug, Default, Clone)]
-struct StaticLevels {
+pub struct StaticLevels {
     levels: Vec<Arc<Level>>,
+}
+
+#[derive(Debug)]
+pub struct Ref<'d> {
+    writable: &'d Level,
+    frozen: &'d StaticLevels,
 }
 
 #[derive(Debug)]
 pub struct RefMut<'d> {
     writable: &'d mut Level,
-
     frozen: &'d StaticLevels,
+}
+
+#[derive(Debug)]
+pub struct LevelMap {
+    writable: Level,
+    frozen: StaticLevels,
+}
+
+impl LevelMap {
+    pub fn new(w: Level, frozen: StaticLevels) -> Self {
+        Self {
+            writable: w,
+            frozen,
+        }
+    }
+
+    pub fn iter_levels(&self) -> impl Iterator<Item = &Level> {
+        [&self.writable]
+            .into_iter()
+            .chain(self.frozen.iter_levels())
+    }
+
+    pub fn to_refmut(&mut self) -> RefMut {
+        RefMut::new(&mut self.writable, &self.frozen)
+    }
+
+    pub fn to_ref(&self) -> Ref {
+        Ref::new(&self.writable, &self.frozen)
+    }
 }
 
 impl StaticLevels {
@@ -41,6 +75,19 @@ impl StaticLevels {
 
     fn iter_levels(&self) -> impl Iterator<Item = &Level> {
         self.levels.iter().map(|x| x.as_ref()).rev()
+    }
+}
+
+impl<'d> Ref<'d> {
+    fn new(w: &'d Level, frozen: &'d StaticLevels) -> Self {
+        Self {
+            writable: w,
+            frozen,
+        }
+    }
+
+    fn iter_levels(&self) -> impl Iterator<Item = &Level> {
+        [self.writable].into_iter().chain(self.frozen.iter_levels())
     }
 }
 
@@ -56,6 +103,13 @@ impl<'d> RefMut<'d> {
         [&*self.writable]
             .into_iter()
             .chain(self.frozen.iter_levels())
+    }
+
+    pub fn to_ref(&self) -> Ref {
+        Ref::new(&*self.writable, &self.frozen)
+    }
+    pub fn into_ref(self) -> Ref<'d> {
+        Ref::new(self.writable, self.frozen)
     }
 }
 
@@ -97,7 +151,7 @@ where
     type SetFut<'f>: Future<Output = (K::V, K::V)>
     where
         Self: 'f,
-        'd: 'f,
+        // 'd: 'f,
         'me: 'f;
 
     /// Set an entry and returns the old value and the new value.
@@ -172,6 +226,61 @@ impl<'me> MapApi<'me, 'me, String> for &'me mut Level {
                 prev.unwrap_or_default(),
                 self.kv.get(&key).cloned().unwrap_or_default(),
             )
+        }
+    }
+}
+
+////////////////////////////// MapApiRO for Writable
+
+impl<'ro_d, K> MapApiRO<'ro_d, K> for Writable<'ro_d>
+where
+    K: MapKey,
+    for<'him> &'him Level: MapApiRO<'him, K>,
+{
+    type GetFut<'f, Q> = impl Future<Output =K::V> + 'f
+        where Self: 'f,
+              'ro_d: 'f,
+              K: Borrow<Q>,
+              Q: Ord + Send + Sync + ?Sized,
+              Q: 'f;
+
+    fn get<'f, Q>(self, key: &'f Q) -> Self::GetFut<'f, Q>
+    where
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+    {
+        async move {
+            let level_data = &*self.writable;
+            let got = level_data.get(key).await;
+            got
+        }
+    }
+}
+
+///////////////////////// MapApi for Writable
+
+impl<'me, 'd, K> MapApi<'me, 'd, K> for Writable<'d>
+where
+    K: MapKey,
+    for<'e> &'e Level: MapApiRO<'e, K>,
+    for<'him> &'him mut Level: MapApi<'him, 'him, K>,
+{
+    type SetFut<'f> = impl Future<Output = (K::V, K::V)> + 'f
+        where
+            Self: 'f,
+            'me: 'f;
+
+    fn set<'f>(self, key: K, value: Option<K::V>) -> Self::SetFut<'f>
+    where
+        'me: 'f,
+        'd: 'f,
+    {
+        async move {
+            let prev = (&self).get(&key).await;
+
+            let (_prev, res) = self.writable.set(key.clone(), value).await;
+            (prev, res)
         }
     }
 }
@@ -266,7 +375,7 @@ where
     }
 }
 
-impl<'ro_me, 'ro_d, K> MapApiRO<'ro_d, K> for &'ro_me RefMut<'ro_d>
+impl<'ro_me, 'ro_d, K> MapApiRO<'ro_d, K> for &'ro_me Ref<'ro_d>
 where
     K: MapKey,
     for<'him> &'him Level: MapApiRO<'him, K>,
@@ -298,6 +407,69 @@ where
     }
 }
 
+impl<'ro_d, K> MapApiRO<'ro_d, K> for Ref<'ro_d>
+where
+    K: MapKey,
+    for<'him> &'him Level: MapApiRO<'him, K>,
+{
+    type GetFut<'f, Q> = impl Future<Output =K::V> + 'f
+        where Self: 'f,
+              'ro_d: 'f,
+              K: Borrow<Q>,
+              Q: Ord + Send + Sync + ?Sized,
+              Q: 'f;
+
+    fn get<'f, Q>(self, key: &'f Q) -> Self::GetFut<'f, Q>
+    where
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+    {
+        async move {
+            for ld in self.iter_levels() {
+                let got = ld.get(key).await;
+                if got != K::V::default() {
+                    return got;
+                }
+            }
+            K::V::default()
+        }
+    }
+}
+
+impl<'ro_me, 'ro_d, K> MapApiRO<'ro_d, K> for &'ro_me RefMut<'ro_d>
+where
+    K: MapKey,
+    for<'him> &'him Level: MapApiRO<'him, K>,
+{
+    type GetFut<'f, Q> = impl Future<Output =K::V> + 'f
+        where Self: 'f,
+              'ro_me: 'f,
+              'ro_d: 'f,
+              K: Borrow<Q>,
+              Q: Ord + Send + Sync + ?Sized,
+              Q: 'f;
+
+    fn get<'f, Q>(self, key: &'f Q) -> Self::GetFut<'f, Q>
+    where
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+    {
+        self.to_ref().get(key)
+        // async move {
+        //     for ld in self.iter_levels() {
+        //         let got = ld.get(key).await;
+        //         if got != K::V::default() {
+        //             return got;
+        //         }
+        //     }
+        //     K::V::default()
+        // }
+    }
+}
+
 impl<'me, 'd, K> MapApi<'me, 'd, K> for &'me mut RefMut<'d>
 where
     K: MapKey,
@@ -323,6 +495,116 @@ where
     }
 }
 
+impl<'ro_d, K> MapApiRO<'ro_d, K> for RefMut<'ro_d>
+where
+    K: MapKey,
+    for<'him> &'him Level: MapApiRO<'him, K>,
+{
+    type GetFut<'f, Q> = impl Future<Output =K::V> + 'f
+    where Self: 'f,
+          'ro_d: 'f,
+          K: Borrow<Q>,
+          Q: Ord + Send + Sync + ?Sized,
+          Q: 'f;
+
+    fn get<'f, Q>(self, key: &'f Q) -> Self::GetFut<'f, Q>
+    where
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+    {
+        // self.to_ref().get(key)
+        MapApiRO::get(self.into_ref(), key)
+        // async move {
+        //     for ld in self.iter_levels() {
+        //         let got = ld.get(key).await;
+        //         if got != K::V::default() {
+        //             return got;
+        //         }
+        //     }
+        //     K::V::default()
+        // }
+    }
+}
+
+impl<'me, 'd, K> MapApi<'me, 'd, K> for RefMut<'d>
+where
+    K: MapKey,
+    for<'e> &'e Level: MapApiRO<'e, K>,
+    for<'him> &'him mut Level: MapApi<'him, 'him, K>,
+{
+    type SetFut<'f> = impl Future<Output = (K::V, K::V)> + 'f
+        where
+            Self: 'f,
+            'me: 'f;
+
+    fn set<'f>(self, key: K, value: Option<K::V>) -> Self::SetFut<'f>
+    where
+        'me: 'f,
+        'd: 'f,
+    {
+        async move {
+            let prev = (&self).get(&key).await;
+
+            let (_prev, res) = self.writable.set(key.clone(), value).await;
+            (prev, res)
+        }
+    }
+}
+
+impl<'ro_me, 'ro_d, K> MapApiRO<'ro_d, K> for &'ro_me LevelMap
+where
+    K: MapKey,
+    for<'him> &'him Level: MapApiRO<'him, K>,
+{
+    type GetFut<'f, Q> = impl Future<Output =K::V> + 'f
+        where Self: 'f,
+              'ro_me: 'f,
+              'ro_d: 'f,
+              K: Borrow<Q>,
+              Q: Ord + Send + Sync + ?Sized,
+              Q: 'f;
+
+    fn get<'f, Q>(self, key: &'f Q) -> Self::GetFut<'f, Q>
+    where
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+    {
+        self.to_ref().get(key)
+        // async move {
+        //     for ld in self.iter_levels() {
+        //         let got = ld.get(key).await;
+        //         if got != K::V::default() {
+        //             return got;
+        //         }
+        //     }
+        //     K::V::default()
+        // }
+    }
+}
+
+impl<'me, 'd, K> MapApi<'me, 'd, K> for &'me mut LevelMap
+where
+    K: MapKey,
+    for<'e> &'e Level: MapApiRO<'e, K>,
+    for<'him> &'him mut Level: MapApi<'him, 'him, K>,
+{
+    type SetFut<'f> = impl Future<Output = (K::V, K::V)> + 'f
+    where
+        Self: 'f,
+        'me: 'f;
+
+    fn set<'f>(self, key: K, value: Option<K::V>) -> Self::SetFut<'f>
+    where
+        'me: 'f,
+        // 'd: 'f,
+    {
+        self.to_refmut().set(key, value)
+    }
+}
+
 #[tokio::main]
 async fn main() {
     let k = || "a".to_string();
@@ -333,9 +615,10 @@ async fn main() {
 
     d.kv.insert(k(), Val(1));
 
+    // MapApi for ref of Writable
     {
         let mut m = Writable { writable: &mut d };
-        let got = m.get(&k()).await;
+        let got = (&m).get(&k()).await;
         println!("{:?}", got);
 
         {
@@ -351,8 +634,19 @@ async fn main() {
         }
     }
 
+    // MapApi for Writable
+    {
+        let mut m = Writable { writable: &mut d };
+        let prev = { m }.set(k(), Some(Val(3))).await;
+        println!("Writable: {:?}", prev);
+
+        let mut m = Writable { writable: &mut d };
+        let got = { m }.get(&k()).await;
+        println!("{:?}", got);
+    }
+
     // &StaticLeveledMap: get
-    let lvl_map = {
+    let static_levels = {
         let mut d1 = Level {
             kv: Default::default(),
         };
@@ -367,7 +661,7 @@ async fn main() {
         StaticLevels::new([Arc::new(d1), Arc::new(d2)])
     };
     {
-        let got = lvl_map.get(&k()).await;
+        let got = static_levels.get(&k()).await;
         println!("StaticLeveledMap: {:?}", got);
     }
 
@@ -376,14 +670,27 @@ async fn main() {
         let mut d = Level {
             kv: Default::default(),
         };
-        let mut rm = RefMut::new(&mut d, &lvl_map);
-        let got = rm.get(&k()).await;
+        let mut rm = RefMut::new(&mut d, &static_levels);
+        let got = (&rm).get(&k()).await;
         println!("LeveledRefMut: {:?}", got);
 
-        let res = rm.set(k(), Some(Val(5))).await;
+        let res = (&mut rm).set(k(), Some(Val(5))).await;
         println!("LeveledRefMut::set() res: {:?}", res);
 
         let got = rm.get(&k()).await;
         println!("LeveledRefMut: {:?}", got);
+    }
+
+    {
+        let mut d = Level {
+            kv: Default::default(),
+        };
+        let mut lm = LevelMap::new(d, static_levels);
+
+        let res = lm.set(k(), Some(Val(7))).await;
+        println!("LevelMap::set() res: {:?}", res);
+
+        let got = lm.get(&k()).await;
+        println!("LevelMap::get() got: {:?}", got);
     }
 }

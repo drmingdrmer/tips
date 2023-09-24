@@ -11,7 +11,18 @@ Rust 中 trait 和 lifetime 结合使用会让编程变得复杂.
 
     我们给出一个不含有 lifetime 参数简化版的设计,
     及实现了Level, Writable, StaticLevels, RefMut 这4个 struct,
-    用来展示功能:
+    用来展示功能.
+
+    这个版本的map trait实现给'static 类型的数据, 每个trait method 接受一个引用.
+    所以这个map trait 无法为一个临时变量实现, 例如下面的代码中,
+    tmp是一个临时变量, 则MapApi::get(&self) 在这个场合就无法使用了.
+
+    ```rust
+    fn foo() -> () {
+        let tmp = Tmp::new();
+        tmp.get("key").await
+    }
+    ```
 
 -   [map-api-lifetime.rs](../rust-playground/src/bin/map-api-lifetime.rs)
 
