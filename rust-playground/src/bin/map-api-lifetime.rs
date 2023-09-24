@@ -4,13 +4,24 @@
 
 #![feature(type_alias_impl_trait)]
 
+use futures_util::stream::BoxStream;
+use futures_util::StreamExt;
 use std::borrow::Borrow;
 use std::collections::BTreeMap;
 use std::future::Future;
+use std::ops::RangeBounds;
 use std::sync::Arc;
+use stream_more::KMerge;
+
+pub fn by_key_seq<K, V>((k1, _v1): &(K, V), (k2, _v2): &(K, V)) -> bool
+where
+    K: MapKey,
+{
+    k1 <= k2
+}
 
 #[derive(Debug, Clone, Default, PartialEq)]
-struct Val(u64);
+pub struct Val(u64);
 
 #[derive(Debug, Default)]
 pub struct Level {
@@ -88,7 +99,7 @@ impl<'d> Ref<'d> {
         }
     }
 
-    fn iter_levels(&self) -> impl Iterator<Item = &Level> {
+    fn iter_levels(&self) -> impl Iterator<Item = &'d Level> + 'd {
         [self.writable].into_iter().chain(self.frozen.iter_levels())
     }
 }
@@ -115,7 +126,7 @@ impl<'d> RefMut<'d> {
     }
 }
 
-trait MapKey: Clone + Ord + Send + Sync + 'static {
+pub trait MapKey: Clone + Ord + Send + Sync + Unpin + 'static {
     type V: Default + Clone + PartialEq + Send + Sync + Unpin + 'static;
 }
 
@@ -123,7 +134,7 @@ impl MapKey for String {
     type V = Val;
 }
 
-trait MapApiRO<'d, K>: Send + Sync
+pub trait MapApiRO<'d, K>: Send + Sync
 where
     K: MapKey,
 {
@@ -140,13 +151,28 @@ where
         K: Borrow<Q>,
         Q: Ord + Send + Sync + ?Sized,
         Q: 'f;
+
+    type RangeFut<'f, Q, R>: Future<Output = BoxStream<'f, (K, K::V)>>
+    where
+        Self: 'f,
+        'd: 'f,
+        K: Borrow<Q>,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+        Q: Ord + Send + Sync + ?Sized,
+        Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Send + Sync + Clone;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-trait MapApi<'me, 'd, K>: MapApiRO<'d, K>
+pub trait MapApi<'me, 'd, K>: MapApiRO<'d, K>
 where
     K: MapKey,
 {
@@ -188,6 +214,27 @@ where
     {
         (&*self).get(key)
     }
+
+    type RangeFut<'f, Q, R> = <&'ro_me T as MapApiRO<'ro_d, K>>::RangeFut<'f, Q,R>
+    where
+        Self: 'f,
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+        Q: Ord + Send + Sync + ?Sized,
+        Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        (&*self).range(range)
+    }
 }
 
 impl<'d> MapApiRO<'d, String> for &'d Level {
@@ -207,6 +254,28 @@ impl<'d> MapApiRO<'d, String> for &'d Level {
         Q: 'f,
     {
         async move { self.kv.get(key).cloned().unwrap_or_default() }
+    }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (String, <String as MapKey>::V)>>
+        where
+            Self: 'f,
+            'd: 'f,
+            String: Borrow<Q>,
+            R: RangeBounds<Q> + Send + Sync + Clone,
+            Q: Ord + Send + Sync + ?Sized,
+            Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'd: 'f,
+        String: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        async move {
+            let it = self.kv.range(range).map(|(k, v)| (k.clone(), v.clone()));
+            futures::stream::iter(it).boxed()
+        }
     }
 }
 
@@ -278,6 +347,29 @@ where
             got
         }
     }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+        where
+            Self: 'f,
+            'ro_d: 'f,
+            K: Borrow<Q>,
+            R: RangeBounds<Q> + Send + Sync + Clone,
+            Q: Ord + Send + Sync + ?Sized,
+            Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        async move {
+            let level_data = &*self.writable;
+            let got = level_data.range(range).await;
+            got
+        }
+    }
 }
 
 ///////////////////////// MapApi for Writable
@@ -335,6 +427,31 @@ where
             got
         }
     }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+        where
+            Self: 'f,
+            'ro_me: 'f,
+            'ro_d: 'f,
+            K: Borrow<Q>,
+            R: RangeBounds<Q> + Send + Sync + Clone,
+            Q: Ord + Send + Sync + ?Sized,
+            Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        async move {
+            let level_data = &*self.writable;
+            let got = level_data.range(range).await;
+            got
+        }
+    }
 }
 
 /////////////////////////
@@ -364,6 +481,7 @@ where
     }
 }
 
+// TODO: use LeveledRef
 impl<'ro_d, K> MapApiRO<'ro_d, K> for &'ro_d StaticLevels
 where
     K: MapKey,
@@ -393,6 +511,35 @@ where
                 }
             }
             K::V::default()
+        }
+    }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+        where
+            Self: 'f,
+            'ro_d: 'f,
+            K: Borrow<Q>,
+            R: RangeBounds<Q> + Send + Sync + Clone,
+            Q: Ord + Send + Sync + ?Sized,
+            Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        async move {
+            let mut km = KMerge::by(by_key_seq);
+
+            for api in self.iter_levels() {
+                let a = api.range(range.clone()).await;
+                km = km.merge(a);
+            }
+
+            let x: BoxStream<'_, (K, K::V)> = Box::pin(km);
+            x
         }
     }
 }
@@ -427,6 +574,37 @@ where
             K::V::default()
         }
     }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+    where
+        Self: 'f,
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+        Q: Ord + Send + Sync + ?Sized,
+        Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        async move {
+            let mut km = KMerge::by(by_key_seq);
+
+            for api in self.iter_levels() {
+                let a = api.range(range.clone()).await;
+                km = km.merge(a);
+            }
+
+            let x: BoxStream<'_, (K, K::V)> = Box::pin(km);
+            x
+        }
+    }
 }
 
 impl<'ro_d, K> MapApiRO<'ro_d, K> for Ref<'ro_d>
@@ -457,6 +635,35 @@ where
             K::V::default()
         }
     }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+        where
+            Self: 'f,
+            'ro_d: 'f,
+            K: Borrow<Q>,
+            R: RangeBounds<Q> + Send + Sync + Clone,
+            Q: Ord + Send + Sync + ?Sized,
+            Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        async move {
+            let mut km = KMerge::by(by_key_seq);
+
+            for api in self.iter_levels() {
+                let a = api.range(range.clone()).await;
+                km = km.merge(a);
+            }
+
+            let x: BoxStream<'_, (K, K::V)> = Box::pin(km);
+            x
+        }
+    }
 }
 
 impl<'ro_me, 'ro_d, K> MapApiRO<'ro_d, K> for &'ro_me RefMut<'ro_d>
@@ -480,6 +687,27 @@ where
         Q: Ord + Send + Sync + ?Sized,
     {
         self.to_ref().get(key)
+    }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+        where
+            Self: 'f,
+            'ro_me: 'f,
+            'ro_d: 'f,
+            K: Borrow<Q>,
+            R: RangeBounds<Q> + Send + Sync + Clone,
+            Q: Ord + Send + Sync + ?Sized,
+            Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        self.to_ref().range(range)
     }
 }
 
@@ -527,6 +755,25 @@ where
         Q: Ord + Send + Sync + ?Sized,
     {
         self.into_ref().get(key)
+    }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+        where
+            Self: 'f,
+            'ro_d: 'f,
+            K: Borrow<Q>,
+            R: RangeBounds<Q> + Send + Sync + Clone,
+            Q: Ord + Send + Sync + ?Sized,
+            Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        self.into_ref().range(range)
     }
 }
 
@@ -576,6 +823,27 @@ where
         Q: Ord + Send + Sync + ?Sized,
     {
         self.to_ref().get(key)
+    }
+
+    type RangeFut<'f, Q, R> = impl Future<Output = BoxStream<'f, (K, K::V)>>
+    where
+        Self: 'f,
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+        Q: Ord + Send + Sync + ?Sized,
+        Q: 'f;
+
+    fn range<'f, Q, R>(self, range: R) -> Self::RangeFut<'f, Q, R>
+    where
+        'ro_me: 'f,
+        'ro_d: 'f,
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Clone + Send + Sync,
+    {
+        self.to_ref().range(range)
     }
 }
 
@@ -686,5 +954,9 @@ async fn main() {
 
         let got = lm.get(&k()).await;
         println!("LevelMap::get() got: {:?}", got);
+
+        let strm = lm.range(k()..).await;
+        let got = strm.collect::<Vec<_>>().await;
+        println!("LevelMap::range() got: {:?}", got);
     }
 }
