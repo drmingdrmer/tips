@@ -1,14 +1,25 @@
 //! A simplified example of a map API without lifetimes.
 
+use futures_util::stream::BoxStream;
+use futures_util::StreamExt;
 use std::borrow::Borrow;
 use std::collections::BTreeMap;
+use std::ops::RangeBounds;
 use std::sync::Arc;
+use stream_more::KMerge;
+
+pub fn by_key_seq<K, V>((k1, _v1): &(K, V), (k2, _v2): &(K, V)) -> bool
+where
+    K: MapKey,
+{
+    k1 <= k2
+}
 
 /// Value type to be stored in a map
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct Val(pub u64);
 
-pub trait MapKey: Send + Sync + Clone + Ord + 'static {}
+pub trait MapKey: Clone + Ord + Send + Sync + Unpin + 'static {}
 
 impl MapKey for String {}
 
@@ -20,6 +31,12 @@ pub trait MapApiRO<K>: Send + Sync {
     where
         K: Borrow<Q>,
         Q: Ord + Send + Sync + ?Sized;
+
+    async fn range<Q, R>(&self, range: R) -> BoxStream<'_, (K, Self::V)>
+    where
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Send + Sync + Clone;
 }
 
 #[async_trait::async_trait]
@@ -47,6 +64,17 @@ impl MapApiRO<String> for Level {
     {
         self.kv.get(key).cloned().unwrap_or_default()
     }
+
+    async fn range<Q, R>(&self, range: R) -> BoxStream<'_, (String, Self::V)>
+    where
+        String: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+    {
+        let it = self.kv.range(range).map(|(k, v)| (k.clone(), v.clone()));
+
+        futures::stream::iter(it).boxed()
+    }
 }
 
 #[async_trait::async_trait]
@@ -70,6 +98,7 @@ pub struct Writable<'d> {
 #[async_trait::async_trait]
 impl<'d, K> MapApiRO<K> for Writable<'d>
 where
+    K: MapKey,
     Level: MapApiRO<K>,
 {
     type V = <Level as MapApiRO<K>>::V;
@@ -80,6 +109,15 @@ where
         Q: Ord + Send + Sync + ?Sized,
     {
         self.writable.get(key).await
+    }
+
+    async fn range<Q, R>(&self, range: R) -> BoxStream<'_, (K, Self::V)>
+    where
+        K: Clone + Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+    {
+        self.writable.range(range).await
     }
 }
 
@@ -139,6 +177,23 @@ where
         }
         Self::V::default()
     }
+
+    async fn range<Q, R>(&self, range: R) -> BoxStream<'_, (K, Self::V)>
+    where
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+    {
+        let mut km = KMerge::by(by_key_seq::<K, Self::V>);
+
+        for api in self.iter_levels() {
+            let a = api.range(range.clone()).await;
+            km = km.merge(a);
+        }
+
+        let x: BoxStream<'_, (K, Self::V)> = Box::pin(km);
+        x
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -187,6 +242,23 @@ where
         }
         Self::V::default()
     }
+
+    async fn range<Q, R>(&self, range: R) -> BoxStream<'_, (K, Self::V)>
+    where
+        K: Borrow<Q>,
+        Q: Ord + Send + Sync + ?Sized,
+        R: RangeBounds<Q> + Send + Sync + Clone,
+    {
+        let mut km = KMerge::by(by_key_seq::<K, Self::V>);
+
+        for api in self.iter_levels() {
+            let a = api.range(range.clone()).await;
+            km = km.merge(a);
+        }
+
+        let x: BoxStream<'_, (K, Self::V)> = Box::pin(km);
+        x
+    }
 }
 
 #[async_trait::async_trait]
@@ -204,28 +276,28 @@ where
 
 #[tokio::main]
 async fn main() {
-    let k = || "a".to_string();
+    let k = |s: &str| s.to_string();
 
     let mut d = Level {
         kv: Default::default(),
     };
 
-    d.kv.insert(k(), Val(1));
+    d.kv.insert(k("a"), Val(1));
 
     {
         let mut m = Writable { writable: &mut d };
-        let got = m.get(&k()).await;
+        let got = m.get(&k("a")).await;
         println!("{:?}", got);
 
         {
             let mu = &mut m;
-            let prev = mu.set(k(), Val(3)).await;
+            let prev = mu.set(k("a"), Val(3)).await;
             println!("prev: {:?}", prev);
         }
 
         {
             let mu = &mut m;
-            let got = mu.get(&k()).await;
+            let got = mu.get(&k("a")).await;
             println!("{:?}", got);
         }
     }
@@ -240,13 +312,15 @@ async fn main() {
             kv: Default::default(),
         };
 
-        d1.kv.insert(k(), Val(3));
-        d2.kv.insert(k(), Val(2));
+        d1.kv.insert(k("a"), Val(3));
+        d2.kv.insert(k("a"), Val(2));
+
+        d1.kv.insert(k("b"), Val(6));
 
         StaticLevels::new([Arc::new(d1), Arc::new(d2)])
     };
     {
-        let got = lvl_map.get(&k()).await;
+        let got = lvl_map.get(&k("a")).await;
         println!("StaticLeveledMap: {:?}", got);
     }
 
@@ -256,13 +330,22 @@ async fn main() {
             kv: Default::default(),
         };
         let mut rm = RefMut::new(&mut d, &lvl_map);
-        let got = rm.get(&k()).await;
+        let got = rm.get(&k("a")).await;
         println!("LeveledRefMut: {:?}", got);
 
-        let res = rm.set(k(), Val(5)).await;
+        let res = rm.set(k("a"), Val(5)).await;
         println!("LeveledRefMut::set() res: {:?}", res);
 
-        let got = rm.get(&k()).await;
+        let res = rm.set(k("b"), Val(7)).await;
+        println!("LeveledRefMut::set() res: {:?}", res);
+
+        let got = rm.get(&k("a")).await;
         println!("LeveledRefMut: {:?}", got);
+
+        let x = rm.range(k("")..).await;
+        println!(
+            "LeveledRefMut::range(..): {:?}",
+            x.collect::<Vec<_>>().await
+        );
     }
 }
