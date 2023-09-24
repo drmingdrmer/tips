@@ -1,5 +1,7 @@
 //! A complex example of a map API with lifetimes.
 
+// TODO: define MapKey { type V: MapValue }
+
 #![feature(type_alias_impl_trait)]
 
 use std::borrow::Borrow;
@@ -144,14 +146,13 @@ where
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-trait MapApi<'me, 'd, K>: MapApiRO<'d, K> + Send + Sync
+trait MapApi<'me, 'd, K>: MapApiRO<'d, K>
 where
     K: MapKey,
 {
     type SetFut<'f>: Future<Output = (K::V, K::V)>
     where
         Self: 'f,
-        // 'd: 'f,
         'me: 'f;
 
     /// Set an entry and returns the old value and the new value.
@@ -209,6 +210,27 @@ impl<'d> MapApiRO<'d, String> for &'d Level {
     }
 }
 
+// This will fail, with lifetime `'d`
+// impl<'me, 'd> MapApi<'me, 'd, String> for &'me mut Level {
+//     type SetFut<'f> = impl Future<Output = (<String as MapKey>::V, <String as MapKey>::V)> + 'f
+//         where
+//             Self: 'f,
+//             'me : 'f
+//     ;
+//
+//     fn set<'f>(self, key: String, value: Option<<String as MapKey>::V>) -> Self::SetFut<'f>
+//         where
+//             'me: 'f,
+//     {
+//         async move {
+//             let prev = self.kv.insert(key.clone(), value.unwrap());
+//             (
+//                 prev.unwrap_or_default(),
+//                 self.kv.get(&key).cloned().unwrap_or_default(),
+//             )
+//         }
+//     }
+// }
 impl<'me> MapApi<'me, 'me, String> for &'me mut Level {
     type SetFut<'f> = impl Future<Output = (<String as MapKey>::V, <String as MapKey>::V)> + 'f
     where
@@ -458,15 +480,6 @@ where
         Q: Ord + Send + Sync + ?Sized,
     {
         self.to_ref().get(key)
-        // async move {
-        //     for ld in self.iter_levels() {
-        //         let got = ld.get(key).await;
-        //         if got != K::V::default() {
-        //             return got;
-        //         }
-        //     }
-        //     K::V::default()
-        // }
     }
 }
 
@@ -513,17 +526,7 @@ where
         K: Borrow<Q>,
         Q: Ord + Send + Sync + ?Sized,
     {
-        // self.to_ref().get(key)
-        MapApiRO::get(self.into_ref(), key)
-        // async move {
-        //     for ld in self.iter_levels() {
-        //         let got = ld.get(key).await;
-        //         if got != K::V::default() {
-        //             return got;
-        //         }
-        //     }
-        //     K::V::default()
-        // }
+        self.into_ref().get(key)
     }
 }
 
@@ -573,15 +576,6 @@ where
         Q: Ord + Send + Sync + ?Sized,
     {
         self.to_ref().get(key)
-        // async move {
-        //     for ld in self.iter_levels() {
-        //         let got = ld.get(key).await;
-        //         if got != K::V::default() {
-        //             return got;
-        //         }
-        //     }
-        //     K::V::default()
-        // }
     }
 }
 
