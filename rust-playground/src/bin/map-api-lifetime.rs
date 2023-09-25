@@ -70,7 +70,7 @@ impl LevelMap {
             .chain(self.frozen.iter_levels())
     }
 
-    pub fn to_refmut(&mut self) -> RefMut {
+    pub fn to_ref_mut(&mut self) -> RefMut {
         RefMut::new(&mut self.writable, &self.frozen)
     }
 
@@ -863,7 +863,7 @@ where
         'me: 'f,
         // 'd: 'f,
     {
-        self.to_refmut().set(key, value)
+        self.to_ref_mut().set(key, value)
     }
 }
 
