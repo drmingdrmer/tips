@@ -37,3 +37,6 @@ tags:: tips, rust-programming, bug, issue
 
     Tracking issue for incorrect lifetime bound errors in async #110338
     https://github.com/rust-lang/rust/issues/110338
+
+    Lifetime bounds in auto trait impls prevent trait from being implemented on generators #64552
+    https://github.com/rust-lang/rust/issues/64552
