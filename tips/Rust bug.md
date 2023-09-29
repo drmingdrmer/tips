@@ -2,6 +2,9 @@ tags:: tips, rust-programming, bug, issue
 
 目前 Rust 语言中遇到的bug:
 
+对我项目影响较大的已经归到这个 github project:
+[Rust bugs that bother xp!](https://github.com/users/drmingdrmer/projects/2)
+
 -   [ ] incorrect lifetime bound errors when asserting Send for a Future:
 
     Tags: async, lifetime, generator, generic-associated-type, 
@@ -40,3 +43,5 @@ tags:: tips, rust-programming, bug, issue
 
     Lifetime bounds in auto trait impls prevent trait from being implemented on generators #64552
     https://github.com/rust-lang/rust/issues/64552
+
+
