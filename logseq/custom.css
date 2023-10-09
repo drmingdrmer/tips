@@ -1,0 +1,11 @@
+/* remove the padding space above and below code block; top:18->0; bottom:62->44 */
+.CodeMirror-scroll {
+    padding-top: 0px;
+    padding-bottom: 44px;
+}
+
+/* use smaller code font size 14->12 */
+.CodeMirror pre.CodeMirror-line
+{
+    font-size: 12px;
+}
