@@ -208,7 +208,7 @@
 
  :ref/linked-references-collapsed-threshold 0
 
- :favorites ["playground" "latex cheat sheet" "tips" "DOING"]
+ :favorites ["doing" "playground" "latex cheat sheet" "tips"]
 
  ;; any number between 0 and 1 (the greater it is the faster the changes of the next-interval of card reviews) (default 0.5)
  ;; :srs/learning-fraction 0.5
