@@ -1,2 +1,2 @@
-- {{embed [[Rust 遇到泛型参数手动 reborrow mut ref]] }}
+- {{embed [[Rust 中每个 match 分支都占用栈上空间]] }}
 - **All Tips**: [[Tips]]
