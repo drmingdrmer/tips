@@ -1,7 +1,16 @@
 /* remove the padding space above and below code block; top:18->0; bottom:62->44 */
 .CodeMirror-scroll {
     padding-top: 0px;
-    padding-bottom: 44px;
+    padding-bottom: 0px;
+
+    margin-bottom: 0px;
+
+    position: static;
+}
+
+/* the original margin-bottom is a negative value, which cause the code block a bit higher than its container, and there is a unnecessary virtical scroll */
+.CodeMirror-sizer {
+    margin-bottom: 0px !important;
 }
 
 /* use smaller code font size 14->12 */
