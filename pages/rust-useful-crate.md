@@ -40,7 +40,6 @@
           println!("cargo:rustc-cfg=feature=\"any_error_nightly\"");
       }
   }
-  
   ```
 - **cargo-nextest** A next-generation test runner
   https://github.com/nextest-rs/nextest
@@ -52,7 +51,7 @@
   #usage `cargo nextest list`
 	- #case customize test group
 	  `cat .config/nextest.toml`
-	  ```
+	  ```toml
 	  [test-groups]
 	  serial-integration = { max-threads = 1 }
 	  
@@ -61,4 +60,11 @@
 	  test-group = 'serial-integration'
 	  ```
 	  `cargo nextest show-config test-groups`
--
+- **cargo-quickinstall** like Homebrew
+  https://crates.io/crates/cargo-quickinstall
+  #install `cargo install cargo-quickinstall`
+  #usage `cargo quickinstall ripgrep`
+- **cargo-binstall** like Homebrew, fallback to quickinstall
+  https://crates.io/crates/cargo-binstall
+  #install `cargo install cargo-binstall`
+  #usage `cargo binstall xxx`
