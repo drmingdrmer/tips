@@ -19,7 +19,7 @@ fn inner() -> u8 {
     0
 }
 
-fn outer() {
+fn outer_match() {
     let v = 0;
     // Every matching arm occupies a piece of memory on the stack.
     // Thus the stack memory for `inner()` starts will be 3KB after on the stack.
@@ -31,7 +31,21 @@ fn outer() {
     };
 }
 
+fn outer_blocks() {
+    {
+        inner();
+    }
+    {
+        let _c = [0u8; 1024];
+    }
+    {
+        let _c = [0u8; 1024 * 2];
+    }
+}
+
 fn main() {
     print_stack_pos("main");
-    outer();
+    outer_match();
+    print_stack_pos("main");
+    outer_blocks();
 }
