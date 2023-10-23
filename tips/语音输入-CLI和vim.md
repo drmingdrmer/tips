@@ -47,6 +47,9 @@ https://learn.microsoft.com/zh-cn/azure/ai-services/speech-service/how-to-recogn
 Azure speech to text的官方文档(get started):
 https://docs.azure.cn/zh-cn/ai-services/speech-service/get-started-speech-to-text?tabs=macos%2Cterminal&pivots=programming-language-python
 
+Azure speech to text的官方FAQ:
+https://learn.microsoft.com/en-us/azure/ai-services/speech-service/faq-stt
+
 Azure的speech to text的其他更多的例子，git repo:
 https://github.com/Azure-Samples/cognitive-services-speech-sdk
 https://github.com/Azure-Samples/cognitive-services-speech-sdk/tree/master/samples/python/console
