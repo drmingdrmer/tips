@@ -48,6 +48,7 @@
 	- [[rust-useful-crate]]
 	- [[rust-programming]]
 	- [[rust-search-engine]]
+	- [[rust-serialization]]
 	- [[serverless]]
 	- [[utils]]
 	- [[vercel]]
