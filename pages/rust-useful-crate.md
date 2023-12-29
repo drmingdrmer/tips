@@ -1,4 +1,4 @@
-- **match_template** This crate provides a macro that can be used to append a match expression with multiple arms
+- **match_template** #crate This crate provides a macro that can be used to append a match expression with multiple arms
   ```
   match_template! {
     T = [Int, Real, Double],
@@ -29,7 +29,7 @@
   #usage `typos` to find typos
   #usage `typos --write-changes` or `typos -w` to fix typos
   github-action: https://github.com/crate-ci/typos/blob/HEAD/docs/github-action.md
-- **rustc_version**: get version of rustc
+- **rustc_version**: #crate get version of rustc
   https://docs.rs/rustc_version/latest/rustc_version/
   ```rust
   use rustc_version::version_meta;
@@ -68,3 +68,27 @@
   https://crates.io/crates/cargo-binstall
   #install `cargo install cargo-binstall`
   #usage `cargo binstall xxx`
+- **cargo-wipe** wipes all "target" or "node_modules"
+  #install `cargo install cargo-wipe`
+  #usage `cargo wipe rust`
+- **yazi** Blazing fast terminal file manager written in Rust, based on async I/O
+  https://github.com/sxyazi/yazi
+  #install `cargo install --locked yazi-fm`
+  dependency, see: https://yazi-rs.github.io/usage/installation/
+  `brew install ffmpegthumbnailer unar jq poppler fd ripgrep fzf zoxide`
+  `brew tap homebrew/cask-fonts && brew install --cask font-symbols-only-nerd-font`
+  config preset: https://github.com/sxyazi/yazi/tree/main/yazi-config/preset
+  #issue use-in-item: profiles::text::"use a different font for non-ascii text" and choose nerd font installed from the above step.
+- **indoc** #crate un-indents multiline string at compile time
+  https://docs.rs/indoc/latest/indoc/
+- **utteranc.es** #comment lightweight comments widget built on GitHub issues
+  https://utteranc.es
+  https://github.com/utterance/utterances
+  used by https://rustmagazine.github.io/rust_magazine_2021/index.html
+  looks not banned by GFW
+- **giscus** #comment A comment system powered by GitHub Discussions
+  https://giscus.app/
+  https://github.com/giscus/giscus
+  used by https://blog.openacid.com/algo/mmp3/
+  looks banned by GFW?
+-

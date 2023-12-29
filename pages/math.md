@@ -5,3 +5,5 @@
 - https://en.m.wikipedia.org/wiki/Weak_ordering
 - https://en.wikipedia.org/wiki/Space-filling_curve
 	- https://en.wikipedia.org/wiki/Z-order_curve
+- 对称多项式 https://zh.wikipedia.org/wiki/%E5%B0%8D%E7%A8%B1%E5%A4%9A%E9%A0%85%E5%BC%8F
+-
