@@ -12,6 +12,9 @@ tags:: tips, math
   $L_{p}({\vec {x}})=\lVert {\vec {x}}\rVert _{p}={\Bigl (}\sum _{i=1}^{n}|x_{i}|^{p}{\Bigr )}^{1/p},\qquad {\vec {x}}=\{x_{1},x_{2},\ldots ,x_{n}\},\,p\geqslant 1.$
 	- 范数
 	  https://zh.wikipedia.org/wiki/%E8%8C%83%E6%95%B0
-
+-
+- #### How do you show that the degree of an irreducible polynomial over the reals is either one or two?
+  https://math.stackexchange.com/questions/1116965/how-do-you-show-that-the-degree-of-an-irreducible-polynomial-over-the-reals-is-e
+-
 - [[math-combinatorics]]
 - [[math-complex-analysis]]

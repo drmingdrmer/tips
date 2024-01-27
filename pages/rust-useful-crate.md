@@ -68,7 +68,12 @@
   https://crates.io/crates/cargo-binstall
   #install `cargo install cargo-binstall`
   #usage `cargo binstall xxx`
+- **cargo-machete** Remove unused dep
+  https://github.com/bnjbvr/cargo-machete
+  #install `cargo install cargo-machete`
+  #usage `cargo machete`
 - **cargo-wipe** wipes all "target" or "node_modules"
+  https://github.com/mihai-dinculescu/cargo-wipe
   #install `cargo install cargo-wipe`
   #usage `cargo wipe rust`
 - **yazi** Blazing fast terminal file manager written in Rust, based on async I/O
@@ -81,6 +86,10 @@
   #issue use-in-item: profiles::text::"use a different font for non-ascii text" and choose nerd font installed from the above step.
 - **indoc** #crate un-indents multiline string at compile time
   https://docs.rs/indoc/latest/indoc/
+- **hickory-dns** #crate DNS client, server, and resolver
+  https://github.com/hickory-dns/hickory-dns
+  previous name: trust-dns-resolver
+  #TODO
 - **utteranc.es** #comment lightweight comments widget built on GitHub issues
   https://utteranc.es
   https://github.com/utterance/utterances
