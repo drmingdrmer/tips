@@ -5,11 +5,15 @@ tags:: cheatsheet, latex
 - $A \in B$ element of
 - $A \sub B \subset C \subseteq D$ subset
 - $\overline{A}$ complement(set), overline
+- $A \lessgtr B$ less and greater
+- $A \prec B \preceq C$ precede or equal
+- $A \succ B \succeq C$ succeed or equal
 - $A \centernot\implies B$, $A \;\not\!\!\!\implies B$ not imply
 - $A \implies B$ implies
 - $A \leftrightarrow B$
 - $A \iff B$ iff, if and only if
 - $A \equiv B$ equivalent
+- $A \neq B$ not equal
 - $p \approx q$ $p \thickapprox q$ `\approx` and `\thickapprox`
 - $\vec{A}$ vector
 - $A \land B$ , $A \and B$ logic and
@@ -30,6 +34,9 @@ tags:: cheatsheet, latex
   equation system `\begin{case}` `&` for align
 - **Spacing**
 	- $A \quad B$ `\quad` quadratone, 空格
+	- $A \; B$ thick space
+	- $A \: B$ medium space
+	- $A \, B$ thin space
 	- $A \!\! B$ : `\!`: insert a negative thin space
 - **Other**
 	- $\because A \therefore B$ `\because` and `\therefore`
@@ -43,6 +50,10 @@ tags:: cheatsheet, latex
 - **Set**
 	- $\{x | p(x)\}$ $\{x : p(x)\}$ $\{x ; p(x)\}$
 	- $\{x \in A | p(x) \}$
+-
+-
+- Create a new symbol with macro:
+  https://tex.stackexchange.com/questions/499668/how-to-create-a-succeeds-or-precedes-symbol
 - Reference:
 	- https://en.wikipedia.org/wiki/List_of_logic_symbols
 	- https://www.geeksforgeeks.org/equality-and-inference-symbols-in-latex/
