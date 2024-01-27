@@ -93,9 +93,49 @@
 	  
 	  ```
 -
+- **mprocs**
+  Run multiple commands in parallel
+  https://github.com/pvolok/mprocs
+  #install `cargo install mprocs`
+	- simple to use
+-
 - **hyper**
   terminal
   #install `brew install hyper`
 	- Cmd-2 does not work. cmdIsMeta/altIsMeta does not work.
 - emoji for everyone: https://github.com/twitter/twemoji
 -
+- **lsd**
+  replacement of `ls`
+  #install `cargo install lsd`
+  https://github.com/lsd-rs/lsd
+-
+- **naugat-ocr**
+  PDF to markdown, by facebook Meta AI
+  #install `pip install nougat-ocr`
+  https://facebookresearch.github.io/nougat/
+  https://github.com/facebookresearch/nougat
+- **marker**
+  Convert PDF to markdown
+  manually install, not tested yet
+  https://github.com/VikParuchuri/marker
+- Access patterns. Web cache workloads typically follow Power-law (generalized Zipfian) distributions [20, 26, 27, 34, 49, 52, 55, 81, 82, 97], 
+  
+  In detail, the ith popular object has a relative frequency of 1/iα, where α is a parameter that decides the skewness of the workload. Previous works find different α values from 0.6 to 0.8 [26], 0.56 [49], 0.71– 0.76 [51], 0.55–0.9 [20], and 0.6–1.5 [97]. 
+  
+  For example, MemC3 [47] uses Cuckoo hashing and CLOCK
+  eviction to improve Memcached’s throughput and scalabil- ity;
+  -- sieve paper
+-
+- **john**: password cracker
+  https://github.com/openwall/john
+-
+- **AudioEdit** app store
+  trim audio
+- **Vary** AI OCR, latex, markdown:
+  https://github.com/Ucas-HaoranWei/Vary?tab=readme-ov-file#Demo
+  Demo: http://region-31.seetacloud.com:22701/
+- **XcodeBenchmark** measures the compilation time of a large codebase on iMac, MacBook, and Mac Pro
+  https://github.com/devMEremenko/XcodeBenchmark
+- **FireDBG** Rust debugger
+  https://firedbg.sea-ql.org/blog/2023-12-12-introducing-firedbg/
