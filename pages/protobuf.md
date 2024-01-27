@@ -6,6 +6,8 @@
 -
 - **Text Format Language Specification**
   https://protobuf.dev/reference/protobuf/textformat-spec/
+	- use `prost_reflect` to convert to and from text fromat, see below
+	  https://docs.rs/prost-reflect/latest/prost_reflect/struct.DynamicMessage.html#method.parse_text_format
 -
 - #### Language Specification
   https://protobuf.com/docs/language-spec
