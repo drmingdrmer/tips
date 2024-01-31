@@ -4,13 +4,30 @@ serde bound tutorial: https://serde.rs/attr-bound.html
 
 感谢热心网友 https://github.com/tvsfx 详细解释了这个问题: https://github.com/datafuselabs/openraft/pull/993#issuecomment-1906027920
 
-## 去掉多余的自动生成的 trait bound
-
 本文使用的源码:
 [serde-bound.rs](../rust-playground/src/bin/serde-bound.rs)
 
-使用 `#[derive(Serialize, Deserialize)]` 时,
-Rust 会帮我们为泛型参数添加一个 `where T: Serialize + Deserialize<'_>` 的 trait bound,
+## derive 自动产生 trait bound
+
+使用 `#[derive(Serialize, Deserialize)]` 为一个类型添加 serde 实现时,
+Rust 会帮我们为泛型参数添加一个 `where T: Serialize; where T: Deserialize<'_>` 的 trait bound,
+例如下面的声明, build 出 `Serialize` 和 `Deserialize` 的实现分别如下:
+
+```rust
+#[derive(serde::Deserialize, serde::Serialize)]
+struct MyError<E> {}
+
+// `cargo expand --bin serde-bound --tests` outputs:
+
+impl<E> _serde::Serialize for MyError<E>
+where E: _serde::Serialize,
+
+impl<'de, E> _serde::Deserialize<'de> for MyError<E>
+where E: _serde::Deserialize<'de>,
+```
+
+## 去掉多余的自动生成的 trait bound
+
 但有时会遇到自动生成的条件约束无法正确匹配到类型的问题,
 例如下面这个例子中, `NodeId` 本身已经指定了需要有 `Serialize` 和 `Deserialize` 实现,
 而 `#[derive(Serialize, Deserialize)]` 又会给 `Fatal` 增加一个 `where NID: Serialize + Deserialize<'_>` 的约束,
