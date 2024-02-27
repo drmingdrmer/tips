@@ -1,3 +1,12 @@
+//! This does not work:
+//! ```ignore
+//! struct Echoable<T> {
+//!     _p: PhantomData<T>,
+//! }
+//! <(&&Echoable<u32>)>::echo();
+//! // function or associated item not found in `&&Echoable<u32>
+//! // No autoref
+//! ```
 use std::fmt::Debug;
 
 struct Echoable<T>(T);
