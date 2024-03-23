@@ -108,3 +108,39 @@ Source files:
 
 - [conflict.rs](https://github.com/drmingdrmer/tips/blob/main/rust-playground/src/bin/impl-trait-for-option-generic-conflict.rs)
 - [solution.rs](https://github.com/drmingdrmer/tips/blob/main/rust-playground/src/bin/impl-trait-for-option-generic-solution.rs)
+
+
+[Another solution](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=44d57a610677090041a66bf951805b6e)
+
+zz: https://twitter.com/drmingdrmer/status/1610160814841008128
+
+```rust
+pub trait Str {
+    fn to_str(&self) -> String;
+}
+
+impl Str for u64 {
+    fn to_str(&self) -> String {
+        format!("{}", self)
+    }
+}
+
+impl<T: Str> Str for Option<T> {
+    fn to_str(&self) -> String {
+        self.as_ref().map(|x| x.to_str()).unwrap_or("-".to_string())
+    }
+}
+
+impl<U: Str> Str for &U {
+    fn to_str(&self) -> String {
+        (*self).to_str()
+    }
+}
+
+fn main() {
+    println!("{}", 5u64.to_str());
+    println!("{}", Some(&5u64).to_str());
+    println!("{}", Some(5u64).to_str());
+    println!("{}", None::<&u64>.to_str());
+}
+```
