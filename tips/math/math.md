@@ -30,5 +30,5 @@ tags:: tips, math
 - [[math-group]]
 -
 - ---
-- [[重根 repeated root]]
--
+- [[Repeated root 重根]]
+- [[Separable extension 可分扩张(field)]]
