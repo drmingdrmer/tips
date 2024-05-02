@@ -32,3 +32,4 @@ tags:: tips, math
 - ---
 - [[Repeated root 重根]]
 - [[Separable extension 可分扩张(field)]]
+- [[Characteristic 特征(algebra)]]
