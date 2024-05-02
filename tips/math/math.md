@@ -3,6 +3,12 @@ tags:: tips, math
 - TODO:
 	- hyperloglog
 	- catalan number: https://en.wikipedia.org/wiki/Catalan_number
+- hamilton's quaternions
+  Hamilton defined a quaternion as **the quotient of two directed lines in tridimensional space; or, more generally, as the quotient of two vectors**. A quaternion can be represented as the sum of a scalar and a vector. It can also be represented as the product of its tensor and its versor.
+  https://en.wikipedia.org/wiki/Classical_Hamiltonian_quaternions
+- homomorphism from A to A
+  https://en.wikipedia.org/wiki/Algebra_homomorphism
+  [[homomorphism]]
 - https://en.wikipedia.org/wiki/Directed_acyclic_graph
 - https://en.m.wikipedia.org/wiki/Weak_ordering
 - https://en.wikipedia.org/wiki/Space-filling_curve
@@ -16,5 +22,13 @@ tags:: tips, math
 - #### How do you show that the degree of an irreducible polynomial over the reals is either one or two?
   https://math.stackexchange.com/questions/1116965/how-do-you-show-that-the-degree-of-an-irreducible-polynomial-over-the-reals-is-e
 -
+- [[lie group]]
+-
 - [[math-combinatorics]]
 - [[math-complex-analysis]]
+- [[math-field]]
+- [[math-group]]
+-
+- ---
+- [[重根 repeated root]]
+-
