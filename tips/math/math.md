@@ -30,7 +30,8 @@ tags:: tips, math
 - [[math-group]]
 -
 - ---
-- [[Repeated root 重根]]
-- [[Separable extension 可分扩张(field)]]
 - [[Characteristic 特征(algebra)]]
+- [[Repeated root 重根]]
 - [[Algebraic extension 代数扩张]]
+- [[Separable extension 可分扩张(field)]]
+- [[Formal derivative 形式导数]]
