@@ -21,11 +21,26 @@ async fn func_ok() -> () {
     stream_snapshot(strm).await;
 }
 
+// This emit higher rank lifetime error:
 fn func_not_compile() -> impl Future<Output = ()> + Send {
     let strm = stream::iter(vec![]);
     let strm: Pin<Box<dyn Stream<Item = u64> + Send + 'static>> = Box::pin(strm);
 
     async move {
+        stream_snapshot(strm).await;
+    }
+}
+
+// This emit lifetime error:
+// error[E0477]: the type `Pin<Box<dyn Stream<Item = u64> + std::marker::Send>>` does not fulfill the required lifetime
+trait Net {
+    fn send_stream(&self) -> impl Future<Output = ()> + Send;
+}
+struct Foo;
+impl Net for Foo {
+    async fn send_stream(&self) -> () {
+        let strm = stream::iter(vec![]);
+        let strm: Pin<Box<dyn Stream<Item = u64> + Send + 'static>> = Box::pin(strm);
         stream_snapshot(strm).await;
     }
 }
