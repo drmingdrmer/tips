@@ -13,3 +13,6 @@ error: higher-ranked lifetime error
 ```
 
 [box-stream-to-impl-void-lifetime-error.rs](../../rust-playground/src/bin/box-stream-to-impl-void-lifetime-error.rs)
+
+online:
+https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=8c382b5a6d932aaf81815f3825efd5ed
