@@ -173,6 +173,6 @@ jeprof is very slow for large heap analysis, the bottleneck is `addr2line`, if y
 ```text
 git clone https://github.com/gimli-rs/addr2line
 cd addr2line
-cargo b --examples -r
-cp ./target/release/examples/addr2line <your-addr2line-find-with-whereis-addr2line>
+cargo build --features bin
+cp ./target/release/addr2line <your-addr2line-find-with-whereis-addr2line>
 ```
