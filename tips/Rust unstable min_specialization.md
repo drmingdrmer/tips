@@ -34,5 +34,5 @@ fn main() {
 }
 ```
 
-[](../rust-playground/src/bin/min-specialization.rs)
-[](../rust-playground/src/bin/specialization.rs)
+- [min-specialization.rs](../rust-playground/src/bin/min-specialization.rs)
+- [specialization.rs](../rust-playground/src/bin/specialization.rs)

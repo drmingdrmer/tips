@@ -5,6 +5,9 @@ tags:: cheatsheet, latex
 - $A \in B$ element of
 - $A \sub B \subset C \subseteq D$ subset
 - $\overline{A}$ complement(set), overline
+- $A \cdot B$ dot product
+- $A \times B$ times multiply
+- $\det A$ determinant of matrix A
 - $A \lessgtr B$ less and greater
 - $A \prec B \preceq C$ precede or equal
 - $A \succ B \succeq C$ succeed or equal
@@ -16,6 +19,7 @@ tags:: cheatsheet, latex
 - $A \neq B$ not equal
 - $p \approx q$ $p \thickapprox q$ `\approx` and `\thickapprox`
 - $\vec{A}$ vector
+- $V^\dag$ dagger, complex vector transpose: transpose + conjugate
 - $A \land B$ , $A \and B$ logic and
 - $A \cap B$ cap, intersection
 - $A \cup B$ cup, union
