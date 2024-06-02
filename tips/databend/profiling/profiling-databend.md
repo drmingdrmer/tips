@@ -1,4 +1,4 @@
-https://databend.rs/doc/faq/how-to-profiling#memory-profiling
+https://docs.databend.com/guides/community/contributor/how-to-profiling#memory-profiling
 
 
 
