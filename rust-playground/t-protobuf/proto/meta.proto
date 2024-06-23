@@ -1,0 +1,23 @@
+
+syntax = "proto3";
+
+package meta;
+
+//import "request.proto";
+
+message Foo {
+  uint64 foo = 6;
+}
+
+message U64List {
+    uint64 ver = 100;
+    uint64 min_reader_ver = 101;
+
+
+  repeated uint64 u64s = 1;
+}
+
+
+service MyService {
+  rpc Handshake(stream Foo) returns (stream U64List);
+}
