@@ -65,3 +65,6 @@
 - profiling tutorial:
   https://www.p99conf.io/2022/08/02/async-rust-in-practice-performance-pitfalls-profiling/
 -
+- **cve-rs**
+  Blazingly 🔥 fast 🚀 memory vulnerabilities, written in 100% safe Rust. 🦀
+  https://github.com/Speykious/cve-rs

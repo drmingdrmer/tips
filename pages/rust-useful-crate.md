@@ -1,3 +1,31 @@
+- **pingora** #framework by cloudflare A library for building fast, reliable and evolvable network services.
+  https://github.com/cloudflare/pingora
+  https://github.com/cloudflare/pingora/blob/main/docs/quick_start.md
+-
+-
+- https://docs.rs/matchit/0.8.0/matchit/
+-
+- https://docs.rs/test-harness/0.2.0/test_harness/
+-
+- **typos-cli** #crate check and fix typos
+  https://crates.io/crates/typos-cli
+  #install `cargo install typos-cli`
+-
+- Macro expansions are tested with [`macrotest`] crate.
+- Macro compile errors are tested with [`trybuild`] crate.
+- procedure-macro example:
+  https://github.com/dtolnay/syn/tree/master/examples
+-
+-
+- **async-channel** #crate mpmc; Async multi-producer multi-consumer channel
+  https://crates.io/crates/async-channel
+- **ctor** #crate Procedural macro for defining global constructor/destructor functions.
+  https://docs.rs/ctor/0.2.7/ctor/index.html
+  #usage https://github.com/drmingdrmer/databend/blob/9cd5e5ec9988b0afc9614c3fa47a25efb15879a3/src/bendpy/src/utils.rs#L21
+- **nebari** #crate A pure Rust database implementation using an append-only B-Tree file format.
+  https://github.com/khonsulabs/nebari
+- **indoc** #crate un-indents multiline string at compile time
+  https://docs.rs/indoc/latest/indoc/
 - **match_template** #crate This crate provides a macro that can be used to append a match expression with multiple arms
   ```
   match_template! {
@@ -18,7 +46,25 @@
   }
   ```
   https://tikv.github.io/doc/match_template/macro.match_template.html
+- **pollster** #crate #async A minimal async executor that lets you block on a future
+  https://github.com/zesterer/pollster
+- **pulldown-cmark** #crate An efficient, reliable parser for CommonMark, a standard dialect of Markdown
+  https://github.com/pulldown-cmark/pulldown-cmark
+- **stract** #crate web search done right
+  https://github.com/StractOrg/stract
+  use Openraft
+  #LATER
+- **trybuild** #crate #compile #test test rs compile output
+  https://docs.rs/trybuild/latest/trybuild/
 -
+-
+- **serde_stacker** This crate provides a Serde adapter that avoids stack overflow by dynamically growing the stack.
+  https://crates.io/crates/serde_stacker
+-
+- **serde_repr** Derive `Serialize` and `Deserialize` that delegates to the underlying repr of a C-like enum.
+  https://docs.rs/serde_repr/latest/serde_repr/index.html
+- **dprint** Pluggable and configurable code formatting platform written in Rust.
+  https://github.com/dprint/dprint
 - **cargo-public-api** compare the public API, find breaking changes and semver violations
   https://crates.io/crates/cargo-public-api
   #install `cargo install --locked cargo-public-api`
@@ -76,6 +122,10 @@
   https://github.com/mihai-dinculescu/cargo-wipe
   #install `cargo install cargo-wipe`
   #usage `cargo wipe rust`
+-
+- **dust** A more intuitive version of du in rust
+  https://github.com/bootandy/dust
+  #install `cargo install du-dust`
 - **yazi** Blazing fast terminal file manager written in Rust, based on async I/O
   https://github.com/sxyazi/yazi
   #install `cargo install --locked yazi-fm`
@@ -84,12 +134,12 @@
   `brew tap homebrew/cask-fonts && brew install --cask font-symbols-only-nerd-font`
   config preset: https://github.com/sxyazi/yazi/tree/main/yazi-config/preset
   #issue use-in-item: profiles::text::"use a different font for non-ascii text" and choose nerd font installed from the above step.
-- **indoc** #crate un-indents multiline string at compile time
-  https://docs.rs/indoc/latest/indoc/
 - **hickory-dns** #crate DNS client, server, and resolver
   https://github.com/hickory-dns/hickory-dns
   previous name: trust-dns-resolver
   #TODO
+- **limits-rs** #crate A Rust library for determining the limits that an operating system enforces on a given particular process
+  https://github.com/aesedepece/limits-rs
 - **utteranc.es** #comment lightweight comments widget built on GitHub issues
   https://utteranc.es
   https://github.com/utterance/utterances

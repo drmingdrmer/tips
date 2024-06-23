@@ -48,6 +48,41 @@
 	  https://github.com/ekalinin/github-markdown-toc
 	  golang; looks very popular
 - ### Markdown link check
+	- **lychee** https://github.com/lycheeverse/lychee
+	  Used by databend; support cache.
+	  #install  `cargo install lychee`
+	  Sample usage with cache and issue report:
+	  https://github.com/datafuselabs/databend/blob/aa54ea223932087a7b1a06fb690ed780aad8ca5f/.github/workflows/links.yml
+	  ```yaml
+	        - name: Restore lychee cache
+	          id: restore-cache
+	          uses: actions/cache/restore@v3
+	          with:
+	            path: .lycheecache
+	            key: cache-lychee-${{ github.sha }}
+	            restore-keys: cache-lychee-
+	  
+	        - name: Link Checker
+	          id: lychee
+	          uses: lycheeverse/lychee-action@v1.8.0
+	          with:
+	            args: "--base . --cache --max-cache-age 1d . --exclude 'https?://twitter\\.com(?:/.*$)?$'"
+	  
+	        - name: Save lychee cache
+	          uses: actions/cache/save@v3
+	          if: always()
+	          with:
+	            path: .lycheecache
+	            key: ${{ steps.restore-cache.outputs.cache-primary-key }}
+	  
+	        - name: Create Issue From File
+	          if: env.lychee_exit_code != 0
+	          uses: peter-evans/create-issue-from-file@v4
+	          with:
+	            title: Link Checker Report
+	            content-filepath: ./lychee/out.md
+	            labels: report, automated issue
+	  ```
 	- **markdown-link-check**
 	  https://github.com/tcort/markdown-link-check
 	  #install `npm install -g markdown-link-check`

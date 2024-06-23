@@ -154,6 +154,22 @@ Dump every 2^30 bytes:
 MALLOC_CONF=prof:true,lg_prof_interval:30 ./target/release/databend-query
 ```
 
+Generated dump files:
+```
+-rw-r--r-- 1 ubuntu ubuntu  11K Jun  2 14:16 jeprof.2267239.0.i0.heap
+-rw-r--r-- 1 ubuntu ubuntu  11K Jun  2 14:17 jeprof.2267239.1.i1.heap
+-rw-r--r-- 1 ubuntu ubuntu  11K Jun  2 14:17 jeprof.2267239.2.i2.heap
+-rw-r--r-- 1 ubuntu ubuntu  19K Jun  2 14:17 jeprof.2267239.3.i3.heap
+-rw-r--r-- 1 ubuntu ubuntu  27K Jun  2 14:17 jeprof.2267239.4.i4.heap
+-rw-r--r-- 1 ubuntu ubuntu  28K Jun  2 14:17 jeprof.2267239.5.i5.heap
+-rw-r--r-- 1 ubuntu ubuntu  40K Jun  2 14:46 jeprof.2267239.6.i6.heap
+-rw-r--r-- 1 ubuntu ubuntu  42K Jun  2 14:46 jeprof.2267239.7.i7.heap
+-rw-r--r-- 1 ubuntu ubuntu  53K Jun  2 14:46 jeprof.2267239.8.i8.heap
+-rw-r--r-- 1 ubuntu ubuntu  57K Jun  2 14:46 jeprof.2267239.9.i9.heap
+```
+
+The use these dump file to profile memory.
+
 
 ### Generate heap profile[](https://databend.rs/doc/faq/how-to-profiling#generate-heap-profile)
 

@@ -5,11 +5,12 @@
 - [[Today's tip]]
 -
 - [[DOING]]
-- {{query LATER }}
+- {{query #LATER }}
   query-sort-by:: block
   query-table:: true
   query-sort-desc:: true
 - [[reading]]
+- [[openraft]]
 - {{query #read }}
   query-table:: true
   query-sort-by:: block
@@ -17,6 +18,7 @@
 	-
 - **Topics:**
   query-table:: true
+	- [[ai]]
 	- [[assembly]]
 	- [[algorithm-vector-index]]
 	- [[bash]]
@@ -30,6 +32,7 @@
 	- [[chatGPT-util]]
 	- [[clang]]
 	- [[gcc]]
+	- [[gfw]]
 	- [[git]]
 	- [[github]]
 	- [[github-actions]]
@@ -48,6 +51,7 @@
 	- [[productivity]]
 	- [[protobuf]]
 	- [[pyhton]]
+	- [[rust]]
 	- [[rust-useful-crate]]
 	- [[rust-programming]]
 	- [[rust-search-engine]]
