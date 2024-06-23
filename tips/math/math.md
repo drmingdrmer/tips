@@ -28,6 +28,11 @@ tags:: tips, math
 - [[math-complex-analysis]]
 - [[math-field]]
 - [[math-group]]
+
+---
+
+- [[math-mid-school-geometry]]
+
 -
 - ---
 - [[Characteristic 特征(algebra)]]
