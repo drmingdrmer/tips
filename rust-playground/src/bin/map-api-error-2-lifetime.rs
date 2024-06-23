@@ -1,4 +1,5 @@
-#![feature(type_alias_impl_trait)]
+// #![feature(type_alias_impl_trait)]
+#![feature(impl_trait_in_assoc_type)]
 
 use std::borrow::Borrow;
 use std::collections::BTreeMap;
@@ -175,6 +176,7 @@ impl<'me> MapApi<'me, 'me, String> for &'me mut Level {
 impl<'ro_me, 'ro_d, K> MapApiRO<'ro_d, K> for &'ro_me Writable<'ro_d>
 where
     K: MapKey,
+    Self: 'ro_d,
     for<'him> &'him Level: MapApiRO<'him, K>,
 {
     type GetFut< Q> = impl Future<Output =K::V> + 'ro_d

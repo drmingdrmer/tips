@@ -1,13 +1,48 @@
-// Copyright 2023 Datafuse Labs.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+//! Test if JoinHandle can be used in another thread.
+//!
+//! - Without enabling `sync` feature flag, `JoinHandle.await` sometimes blocks forever.
+//! - With `sync` feature flag enabled, `JoinHandle.await` returns correctly. But block forever if the task panics.
+//!
+//! Thanks to @Miaxos
+//! https://github.com/bytedance/monoio/issues/241#issuecomment-1950230596
+
+use std::sync::mpsc;
+use std::time::Duration;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    std::thread::spawn(move || {
+        let mut rt = monoio::RuntimeBuilder::<monoio::FusionDriver>::new()
+            .enable_all()
+            .build()
+            .expect("Failed building the Runtime");
+
+        rt.block_on(async move {
+            let fu = async move {
+                // println!("inner-fu: ready");
+                // panic!("inner-fu: panic");
+                1u64
+            };
+
+            let handle = monoio::spawn(fu);
+            tx.send(handle).unwrap();
+
+            monoio::time::sleep(Duration::from_millis(1_000)).await;
+            println!("outer-fu: after sending handle and sleep");
+        });
+    });
+
+    let handle = rx.recv().unwrap();
+
+    let mut rt = monoio::RuntimeBuilder::<monoio::FusionDriver>::new()
+        .enable_all()
+        .build()
+        .expect("Failed building the Runtime");
+
+    rt.block_on(async move {
+        println!("joiner: before handle.await");
+        let got = handle.await;
+        println!("joiner: after handle.await: {:?}", got);
+    });
+}

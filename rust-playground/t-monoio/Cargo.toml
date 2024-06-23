@@ -6,3 +6,4 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+monoio = {  version = "0.2.2", features = ["sync"] }

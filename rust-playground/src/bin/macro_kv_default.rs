@@ -6,24 +6,23 @@ trait RaftTypeConfig {
 
 macro_rules! impl2 {
     ($($name:ident = $type:ty),* ) => {
-        impl2!(@R_0,
-        $($name = $type,)*
-        @T);
+        impl2!(@F_0, $($name = $type,)* @T);
     };
 
-    (@R_0, $($n1:ident = $t1:ty,)* A=$t: ty, $($n2:ident = $t2:ty,)* @T) => {
-        A=$t:ty,
-        impl2!(@R_1, $($n1 = $t1,)* $($n2 = $t2,)* @T);
-    }
-
-    (@R_1, $($n1:ident = $t1:ty,)* B=$t: ty, $($n2:ident = $t2:ty,)* @T) => {
-        B=$t:ty,
-        impl2!(@R_2, $($n1 = $t1,)* $($n2 = $t2,)* @T);
-    }
-
-    (@R_2, $($n1:ident = $t1:ty,)* C=$t: ty, $($n2:ident = $t2:ty,)* @T) => {
-        C=$t:ty,
-    }
+    // error: local ambiguity when calling macro `impl2`: multiple parsing options: built-in NTs ident ('n1') or 1 other option.
+    // (@R_0, $($n1:ident = $t1:ty,)* A=$t: ty, $($n2:ident = $t2:ty,)* @T) => {
+    //     A=$t:ty,
+    //     impl2!(@R_1, $($n1 = $t1,)* $($n2 = $t2,)* @T);
+    // };
+    //
+    // (@R_1, $($n1:ident = $t1:ty,)* B=$t: ty, $($n2:ident = $t2:ty,)* @T) => {
+    //     B=$t:ty,
+    //     impl2!(@R_2, $($n1 = $t1,)* $($n2 = $t2,)* @T);
+    // };
+    //
+    // (@R_2, $($n1:ident = $t1:ty,)* C=$t: ty, $($n2:ident = $t2:ty,)* @T) => {
+    //     C=$t:ty,
+    // };
 
     (@F_0, A=$t: ty, $($name:ident = $type:ty,)* @T) => {
         type A = $t;
@@ -59,13 +58,6 @@ macro_rules! impl2 {
     };
 
     () => {};
-}
-
-macro_rules! declare_raft_types {
-    ( $($type_id:ident = $type:ty),* ) => {
-
-        impl_it!($($type_id = $type,)*);
-    };
 }
 
 struct Foo {}

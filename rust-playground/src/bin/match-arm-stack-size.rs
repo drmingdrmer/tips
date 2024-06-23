@@ -31,6 +31,7 @@ fn outer_match() {
     };
 }
 
+// allocate 2KB + 1KB on stack
 fn outer_blocks() {
     {
         inner();
@@ -38,6 +39,18 @@ fn outer_blocks() {
     {
         let _c = [0u8; 1024];
     }
+    {
+        let _c = [0u8; 1024 * 2];
+    }
+}
+
+// allocate 2KB on stack, then allocate 1KB on stack
+fn outer_blocks_2() {
+    fn a() {
+        let _c = [0u8; 1024];
+    }
+    a();
+
     {
         let _c = [0u8; 1024 * 2];
     }
