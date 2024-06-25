@@ -35,7 +35,6 @@
 	- [[gfw]]
 	- [[git]]
 	- [[github]]
-	- [[github-actions]]
 	- [[go-programming]]
 	- [[hash]]
 	- [[jemalloc]]

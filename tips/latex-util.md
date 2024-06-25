@@ -27,6 +27,9 @@ tags:: latex
 -
 - [[test-image]]
 -
+- ### Latex example/template
+	- 老c的: https://github.com/lichuang/my-latex-template
+	- 老c推荐的: https://github.com/ElegantLaTeX/ElegantBook
 -
 - Add katex math to docs.rs
   https://stackoverflow.com/questions/46495063/how-to-write-math-formulas-for-rust-documentation

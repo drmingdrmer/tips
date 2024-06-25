@@ -18,4 +18,12 @@
 	  Used by databend: https://github.com/datafuselabs/databend/blob/aa54ea223932087a7b1a06fb690ed780aad8ca5f/.github/workflows/links.yml
 	  Support various languages: https://github.com/actions/cache/blob/main/examples.md#rust---cargo
 	  Cache strategies: https://github.com/actions/cache/blob/main/caching-strategies.md
--
+	- **cache doc**: https://docs.github.com/en/actions/using-workflows/caching-dependencies-to-speed-up-workflows
+	- Automatically commit changes made in your workflow run directly to your repo: https://github.com/EndBug/add-and-commit
+	- ```
+	        - uses: baptiste0928/cargo-install@v1
+	          with:
+	            crate: typos-cli
+	            args: --locked
+	            cache-key: typos-check
+	  ```
