@@ -14,10 +14,34 @@
   pandoc list format:
   `pandoc --list-output-formats`
 -
+- ### Online Markdown Editor
+	- https://doocs.github.io/md/
+	  https://github.com/doocs/md
+	  渲染成微信公众号格式
+	  图片上传, github图床
+-
 - Markdown render:
   rust:
 	- https://github.com/rust-lang/mdBook
 	- https://github.com/wooorm/markdown-rs
+-
+- ### Markdown parser and render
+	- **markdown-it-py**: 
+	  https://pypi.org/project/markdown-it-py/
+	  https://github.com/executablebooks/markdown-it-py
+	  Used by https://github.com/drmingdrmer/poe-app
+		- Follows the **[CommonMark spec](http://spec.commonmark.org/)** for baseline parsing
+		- Configurable syntax: you can add new rules and even replace existing ones.
+		- Pluggable: Adds syntax extensions to extend the parser (see the [plugin list](https://markdown-it-py.readthedocs.io/en/latest/plugins.html)).
+	- **mdformat** #xp-fork
+	  https://github.com/drmingdrmer/mdformat
+	  Used by https://github.com/drmingdrmer/poe-app
+	  For rendering, changes include:
+		- XP: do not escape unparsed link
+		  Such as [xxx][] is used widely in my blog, which can not be parsed
+		  because of lack of link definition `[xxx]: http://url`, but which are
+		  actually valid when rendering process fillin the urls.
+-
 -
 - ### Markdown convert
 	- Convert wikipedia to markdown:
