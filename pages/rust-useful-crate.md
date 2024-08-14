@@ -46,6 +46,9 @@
   }
   ```
   https://tikv.github.io/doc/match_template/macro.match_template.html
+- **ordered-multimap-rs** #crate multiple values can be associated with a given key
+  https://crates.io/crates/ordered-multimap
+  #in-databend
 - **pollster** #crate #async A minimal async executor that lets you block on a future
   https://github.com/zesterer/pollster
 - **pulldown-cmark** #crate An efficient, reliable parser for CommonMark, a standard dialect of Markdown
@@ -57,6 +60,11 @@
 - **trybuild** #crate #compile #test test rs compile output
   https://docs.rs/trybuild/latest/trybuild/
 -
+-
+-
+- ### Human-Readable
+	- **humantime** #crate Human-friendly time parser and formatter
+	  https://docs.rs/humantime/latest/humantime/
 -
 - **serde_stacker** This crate provides a Serde adapter that avoids stack overflow by dynamically growing the stack.
   https://crates.io/crates/serde_stacker
@@ -150,4 +158,15 @@
   https://github.com/giscus/giscus
   used by https://blog.openacid.com/algo/mmp3/
   looks banned by GFW?
+- **git-delta** A syntax-highlighting pager for git, diff, grep, and blame output
+  https://github.com/dandavison/delta
+  #install `cargo install git-delta`
 -
+- **ripgrep**: ripgrep recursively searches directories for a regex pattern while respecting your gitignore
+  #install `cargo install ripgrep`
+  https://github.com/BurntSushi/ripgrep
+-
+- ### Cmmand line util
+	- **topgrade** Upgrade all the things
+	  https://github.com/topgrade-rs/topgrade
+	  #install `cargo install topgrade`
