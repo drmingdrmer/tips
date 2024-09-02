@@ -3,6 +3,7 @@
 	- [[rust-programming]]
 	- [[rust-search-engine]]
 	- [[rust-serialization]]
+	- [[mdbook]]
 -
 - **cargo config**
   https://doc.rust-lang.org/cargo/reference/config.html

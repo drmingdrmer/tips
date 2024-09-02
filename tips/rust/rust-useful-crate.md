@@ -131,6 +131,10 @@
   #install `cargo install cargo-wipe`
   #usage `cargo wipe rust`
 -
+-
+- **jj** A Git-compatible VCS that is both simple and powerful
+  https://github.com/martinvonz/jj?tab=readme-ov-file
+  #install `cargo install --locked --bin jj jj-cli`
 - **dust** A more intuitive version of du in rust
   https://github.com/bootandy/dust
   #install `cargo install du-dust`
@@ -170,3 +174,9 @@
 	- **topgrade** Upgrade all the things
 	  https://github.com/topgrade-rs/topgrade
 	  #install `cargo install topgrade`
+	- **tokei** Count your code, quickly.
+	  https://github.com/XAMPPRocky/tokei
+	  #install `cargo install --git https://github.com/XAMPPRocky/tokei.git tokei`
+	- **minimal-versions** check all crates with minimal version dependencies
+	  https://github.com/taiki-e/cargo-minimal-versions
+	  #install `rustup toolchain add nightly; cargo +stable install cargo-hack --locked; cargo +stable install cargo-minimal-versions --locked`
