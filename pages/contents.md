@@ -18,7 +18,12 @@
 	-
 - **Topics:**
   query-table:: true
+	- ⭐️ [[rust]]
+	- [[漫画]]
+	- [[CG-util]]
+	- [[life]]
 	- [[ai]]
+	- [[ascii-util]]
 	- [[assembly]]
 	- [[algorithm-vector-index]]
 	- [[bash]]
@@ -54,7 +59,6 @@
 	- [[productivity]]
 	- [[protobuf]]
 	- [[pyhton]]
-	- [[rust]]
 	- [[serverless]]
 	- [[tmux]]
 	- [[utils]]
