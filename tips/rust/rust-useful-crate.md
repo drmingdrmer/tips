@@ -22,6 +22,8 @@
 - **ctor** #crate Procedural macro for defining global constructor/destructor functions.
   https://docs.rs/ctor/0.2.7/ctor/index.html
   #usage https://github.com/drmingdrmer/databend/blob/9cd5e5ec9988b0afc9614c3fa47a25efb15879a3/src/bendpy/src/utils.rs#L21
+- **gitoxide** #crate #cli An idiomatic, lean, fast & safe pure Rust implementation of Git
+  https://github.com/Byron/gitoxide
 - **nebari** #crate A pure Rust database implementation using an append-only B-Tree file format.
   https://github.com/khonsulabs/nebari
 - **indoc** #crate un-indents multiline string at compile time
@@ -60,7 +62,9 @@
 - **trybuild** #crate #compile #test test rs compile output
   https://docs.rs/trybuild/latest/trybuild/
 -
--
+- ### Graph / Plot / Diagram
+- **plotters** #crate A rust drawing library for high quality data plotting for both WASM and native, statically and realtimely
+  https://github.com/plotters-rs/plotters
 -
 - ### Human-Readable
 	- **humantime** #crate Human-friendly time parser and formatter
@@ -171,12 +175,12 @@
   https://github.com/BurntSushi/ripgrep
 -
 - ### Cmmand line util
-	- **topgrade** Upgrade all the things
+	- **topgrade** #cli Upgrade all the things
 	  https://github.com/topgrade-rs/topgrade
 	  #install `cargo install topgrade`
-	- **tokei** Count your code, quickly.
+	- **tokei** #cli Count your code, quickly.
 	  https://github.com/XAMPPRocky/tokei
 	  #install `cargo install --git https://github.com/XAMPPRocky/tokei.git tokei`
-	- **minimal-versions** check all crates with minimal version dependencies
+	- **minimal-versions** #cli check all crates with minimal version dependencies
 	  https://github.com/taiki-e/cargo-minimal-versions
 	  #install `rustup toolchain add nightly; cargo +stable install cargo-hack --locked; cargo +stable install cargo-minimal-versions --locked`
