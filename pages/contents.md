@@ -18,10 +18,11 @@
 	-
 - **Topics:**
   query-table:: true
-	- ⭐️ [[rust]]
+	- 📁 ⭐️ [[rust]]
+	- 📁 [[math]]
 	- [[漫画]]
 	- [[CG-util]]
-	- [[life]]
+	- 📁 [[life]]
 	- [[ai]]
 	- [[ascii-util]]
 	- [[assembly]]
@@ -51,7 +52,7 @@
 	- [[logseq-resrouce]]
 	- [[markdown-editor]]
 	- [[markup languages]]
-	- [[math]]
+	-
 	- [[mdbook]]
 	- [[online-drawing]]
 	- [[openai]]
