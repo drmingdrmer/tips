@@ -22,17 +22,19 @@ tags:: tips, math
 - #### How do you show that the degree of an irreducible polynomial over the reals is either one or two?
   https://math.stackexchange.com/questions/1116965/how-do-you-show-that-the-degree-of-an-irreducible-polynomial-over-the-reals-is-e
 -
+-
 - [[lie group]]
+-
+- [[order-dimension@math]]
 -
 - [[math-combinatorics]]
 - [[math-complex-analysis]]
 - [[math-field]]
 - [[math-group]]
-
----
-
+-
+- [[fractal]]
+- ---
 - [[math-mid-school-geometry]]
-
 -
 - ---
 - [[Characteristic 特征(algebra)]]
@@ -40,3 +42,4 @@ tags:: tips, math
 - [[Algebraic extension 代数扩张]]
 - [[Separable extension 可分扩张(field)]]
 - [[Formal derivative 形式导数]]
+- [[Partially Ordered Set 偏序关系]]
