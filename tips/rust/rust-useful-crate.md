@@ -69,6 +69,10 @@
 - ### Human-Readable
 	- **humantime** #crate Human-friendly time parser and formatter
 	  https://docs.rs/humantime/latest/humantime/
+- ### Search-Engine
+	- **Tantivy** #crate is a full-text search engine library inspired by Apache Lucene and written in Rust 
+	  https://github.com/quickwit-oss/tantivy
+	  #in-databend #read
 -
 - **serde_stacker** This crate provides a Serde adapter that avoids stack overflow by dynamically growing the stack.
   https://crates.io/crates/serde_stacker

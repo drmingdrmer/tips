@@ -39,3 +39,13 @@ criterion = { version = "0.5.1", features = [] }
 rand = { version = "0.8.5", features = [] }
 derive_more = "0.99.17"
 
+
+[workspace]
+
+members = [
+    "t-serde-instant"
+]
+exclude = [
+    "t-im",
+]
+
