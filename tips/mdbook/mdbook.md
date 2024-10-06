@@ -2,6 +2,7 @@
 - #install `cargo install mdbook`
 - #usage `mdbook build` `mdbook serve`
 -
+- Add tags: https://crates.io/crates/mdbook-tagger
 - add giscus comment: https://sakaketsukihana.github.io/Notes/mdBook-and-Giscus.html
 - convert to latex and pdf: https://github.com/lbeckman314/mdbook-latex
 - mathjax support: https://rust-lang.github.io/mdBook/format/mathjax.html
