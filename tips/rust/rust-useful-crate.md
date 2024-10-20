@@ -91,18 +91,14 @@
   #usage `typos` to find typos
   #usage `typos --write-changes` or `typos -w` to fix typos
   github-action: https://github.com/crate-ci/typos/blob/HEAD/docs/github-action.md
-- **rustc_version**: #crate get version of rustc
-  https://docs.rs/rustc_version/latest/rustc_version/
-  ```rust
-  use rustc_version::version_meta;
-  use rustc_version::Channel;
-  fn main() {
-      if version_meta().unwrap().channel == Channel::Nightly {
-          println!("cargo:rustc-cfg=any_error_nightly");
-          println!("cargo:rustc-cfg=feature=\"any_error_nightly\"");
-      }
-  }
-  ```
+- **cargo-binstall** like Homebrew, fallback to quickinstall
+  https://crates.io/crates/cargo-binstall
+  #install `cargo install cargo-binstall`
+  #usage `cargo binstall xxx`
+- **cargo-machete** Remove unused dep
+  https://github.com/bnjbvr/cargo-machete
+  #install `cargo install cargo-machete`
+  #usage `cargo machete`
 - **cargo-nextest** A next-generation test runner
   https://github.com/nextest-rs/nextest
   https://nexte.st/
@@ -126,18 +122,32 @@
   https://crates.io/crates/cargo-quickinstall
   #install `cargo install cargo-quickinstall`
   #usage `cargo quickinstall ripgrep`
-- **cargo-binstall** like Homebrew, fallback to quickinstall
-  https://crates.io/crates/cargo-binstall
-  #install `cargo install cargo-binstall`
-  #usage `cargo binstall xxx`
-- **cargo-machete** Remove unused dep
-  https://github.com/bnjbvr/cargo-machete
-  #install `cargo install cargo-machete`
-  #usage `cargo machete`
+- **rustc_version**: #crate get version of rustc
+  https://docs.rs/rustc_version/latest/rustc_version/
+  ```rust
+  use rustc_version::version_meta;
+  use rustc_version::Channel;
+  fn main() {
+      if version_meta().unwrap().channel == Channel::Nightly {
+          println!("cargo:rustc-cfg=any_error_nightly");
+          println!("cargo:rustc-cfg=feature=\"any_error_nightly\"");
+      }
+  }
+  ```
+- **cargo-watch** Watches over your Cargo project's source.
+  https://github.com/watchexec/cargo-watch
+  #install `cargo install cargo-watch --locked`
+  #usage `cargo watch -x 'doc --all --no-deps'`
+  #usage `RUSTDOCFLAGS="-D warnings" cargo watch -x 'doc --all --no-deps'`
 - **cargo-wipe** wipes all "target" or "node_modules"
   https://github.com/mihai-dinculescu/cargo-wipe
   #install `cargo install cargo-wipe`
   #usage `cargo wipe rust`
+- **cargo-fix** Automatically fix lint warnings reported by rustc
+  https://doc.rust-lang.org/cargo/commands/cargo-fix.html
+-
+- Several cargo commands:
+  https://doc.rust-lang.org/cargo/commands/cargo-fetch.html
 -
 -
 - **jj** A Git-compatible VCS that is both simple and powerful
