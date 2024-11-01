@@ -1,3 +1,6 @@
+// Run it with:
+// cargo test
+
 #[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 enum EnumOld {
     A(String),

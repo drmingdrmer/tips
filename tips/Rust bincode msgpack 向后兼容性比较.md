@@ -3,7 +3,7 @@ tags:: tips, rust-programming, serde, msgpack, bincode
 
 [bincode][] serialize 时不带meta信息, 如果数据格式变化, 无法提供向后兼容.
 msgpack([rmp-serde][]) 可选的加入meta信息, 可以提供向后兼容.
-兼容性测试代码: [serde-msgpack-bincode.rs](../rust-playground/src/bin/serde-msgpack-bincode.rs)
+兼容性测试代码: [serde-msgpack-bincode.rs](../snippet/rust/serde-msgpack-bincode/src/main.rs)
 
 
 ### 常用的序列化库的 benchmark
