@@ -1,6 +1,8 @@
 // Run it with:
 // cargo test
 
+use std::io;
+
 #[derive(serde::Serialize, serde::Deserialize, Clone, Debug, PartialEq)]
 enum EnumOld {
     A(String),
@@ -117,6 +119,57 @@ fn test_msgpack_backward_compat_enum() {
     assert_eq!(new.enum_field, EnumNewInsertFieldInTheMiddle::B(100));
     assert_eq!(new.new_string, None);
     assert_eq!(new.new_int, default_new_int());
+}
+
+pub(crate) struct OffsetReader<R> {
+    inner: R,
+    offset: usize,
+}
+
+impl<R: io::Read> OffsetReader<R> {
+    pub(crate) fn new(inner: R) -> Self {
+        Self { inner, offset: 0 }
+    }
+
+    pub(crate) fn offset(&self) -> usize {
+        self.offset
+    }
+}
+
+impl<R: io::Read> io::Read for OffsetReader<R> {
+    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
+        let n = self.inner.read(buf)?;
+        self.offset += n;
+        Ok(n)
+    }
+}
+
+
+#[test]
+fn test_msgpack_writer_reader() {
+    // msgpack with schema
+    let old_format = EnumOld::B(1);
+    let mut buf = Vec::new();
+    rmp_serde::encode::write_named(&mut buf, &old_format).unwrap();
+    println!("{:?}", buf);
+
+    let old_format = EnumOld::B(2);
+    rmp_serde::encode::write_named(&mut buf, &old_format).unwrap();
+    println!("{:?}", buf);
+
+    let mut r = OffsetReader::new(&buf[..]);
+
+    // NOTE that unlike serde_json,
+    // rmp_serde is able to end when it reads the first valid msgpack object
+
+    let t :EnumOld = rmp_serde::decode::from_read(&mut r).unwrap();
+    println!("{:?}, {}", t, r.offset());
+    assert_eq!(t, EnumOld::B(1));
+
+    let t :EnumOld = rmp_serde::decode::from_read(&mut r).unwrap();
+    println!("{:?}, {}", t, r.offset());
+    assert_eq!(t, EnumOld::B(2));
+
 }
 
 fn main() {}
