@@ -1,0 +1,8 @@
+[package]
+name = "dup-file"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fs2 = "0.4.3"
+tempfile = "3.13.0"

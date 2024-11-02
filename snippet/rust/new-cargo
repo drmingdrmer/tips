@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cargo init $1
+
+cat >$1/.gitignore <<-END
+/target
+/.idea
+
+Cargo.lock
+
+.DS_Store
+END
