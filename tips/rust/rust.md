@@ -6,6 +6,12 @@
 	- [[mdbook]]
 	- [[rust-learn]]
 -
+- **tokio**:
+	- https://tony612.github.io/tokio-internals/01.html
+	- [Runtime-agnostic cooperative task scheduling budget](https://internals.rust-lang.org/t/runtime-agnostic-cooperative-task-scheduling-budget/18796)
+	- Reducing tail latencies with automatic cooperative task yielding
+	  https://tokio.rs/blog/2020-04-preemption
+-
 - **cargo config**
   https://doc.rust-lang.org/cargo/reference/config.html
 - [[Rust 如何定义错误]]
@@ -41,8 +47,7 @@
 	-
 -
 - 把 Rust 当作（伪）脚本用。
-	- ```
-	  #!/bin/sh
+	- #!/bin/sh
 	  #![allow(unused_attributes)] /*
 	  OUT=/tmp/tmp && rustc "$0" -o ${OUT} && exec ${OUT} $@ || exit $? #*/
 	  
@@ -58,7 +63,6 @@
 	  fn main() {
 	      println!("hello");
 	  }
-	  ```
 	- 重点是前三行。写的很巧妙，既是合法的 rust 语法，又是合法的 shell 语法。
 	  第一行 shebang 指定了用 sh 执行该脚本，而 rustc 本身也会忽略 shebang 行，没啥好说的。
 	  第二行声明了 rust 的一个内部属性，因为语法是 `#` 开头，所以刚好也是 shell 语法的注释行。结尾用了 rust 的多行注释，完全忽略第三行。

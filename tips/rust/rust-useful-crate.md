@@ -189,10 +189,13 @@
   https://github.com/BurntSushi/ripgrep
 -
 - ### Cmmand line util
+	- **dua** View disk space usage and delete unwanted data, fast.
+	  https://github.com/Byron/dua-cli
+	  #install `cargo install dua-cli`
 	- **topgrade** #cli Upgrade all the things
 	  https://github.com/topgrade-rs/topgrade
 	  #install `cargo install topgrade`
-	- **tokei** #cli Count your code, quickly.
+	- **tokei** #cli Count your code, quickly. line of code; LOC;
 	  https://github.com/XAMPPRocky/tokei
 	  #install `cargo install --git https://github.com/XAMPPRocky/tokei.git tokei`
 	- **minimal-versions** #cli check all crates with minimal version dependencies
