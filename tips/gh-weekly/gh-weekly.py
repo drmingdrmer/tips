@@ -19,8 +19,11 @@ Requirements:
     - GitHub CLI (gh) installed and authenticated
     - OpenAI-compatible API configuration
 
-Environment Variables (Standard OpenAI):
-    export OPENAI_API_KEY="your-api-key"
+Environment Variables:
+    export DEEPSEEK_API_KEY="your-api-key"              # Preferred for DeepSeek (default)
+
+Environment Variables when using other openAI compatible provider:
+    export OPENAI_API_KEY="your-api-key"                # Fallback or for custom services
     export OPENAI_BASE_URL="https://api.openai.com/v1"  # Optional, defaults to DeepSeek
     export OPENAI_MODEL="gpt-4"                         # Optional, defaults to deepseek-chat
 
@@ -32,7 +35,7 @@ Supported Services:
 
 Examples:
     # Use DeepSeek (default)
-    export OPENAI_API_KEY="sk-deepseek-key"
+    export DEEPSEEK_API_KEY="sk-deepseek-key"
     ./gh-weekly.py --chars 150 --filter "core|main"
 
     # Use OpenAI
@@ -294,23 +297,35 @@ def generate_weekly_report(commits, max_chars=500, api_key=None, style_requireme
     commit_text = "\n".join(commit_info)
     system_prompt = generate_system_prompt(max_chars, style_requirements)
 
-    # Get configuration from standard OpenAI environment variables
-    if not api_key:
-        api_key = os.environ.get("OPENAI_API_KEY")
+    # Get configuration from environment variables
     api_base = os.environ.get("OPENAI_BASE_URL", "https://api.deepseek.com")
     model = os.environ.get("OPENAI_MODEL", "deepseek-chat")
+    
+    if not api_key:
+        # If using DeepSeek (default or explicit), prefer DEEPSEEK_API_KEY then fallback to OPENAI_API_KEY
+        if api_base == "https://api.deepseek.com":
+            api_key = os.environ.get("DEEPSEEK_API_KEY") or os.environ.get("OPENAI_API_KEY")
+        else:
+            # If other service is specified, only use OPENAI_API_KEY
+            api_key = os.environ.get("OPENAI_API_KEY")
 
     # Call OpenAI-compatible API
-    log_info(f"🤖 Generating weekly report with {model} (max {max_chars} chars)...")
+    masked_key = f"{api_key[:5]}***{api_key[-4:]}" if api_key else "None"
+    log_info(f"🤖 Generating weekly report using {api_base} - {model} - {masked_key} (max {max_chars} chars)...")
 
     if not api_key:
         log_info("❌ Error: API key is required")
         log_info("📋 Please provide API key:")
         log_info("   1. Command line: --api-key 'your-api-key'")
-        log_info("   2. Environment: export OPENAI_API_KEY='your-api-key'")
+        if api_base == "https://api.deepseek.com":
+            log_info("   2. Environment: export DEEPSEEK_API_KEY='your-api-key'  # Preferred for DeepSeek")
+            log_info("      Or fallback: export OPENAI_API_KEY='your-api-key'")
+        else:
+            log_info("   2. Environment: export OPENAI_API_KEY='your-api-key'")
         log_info("💡 Optionally configure service:")
-        log_info("   export OPENAI_BASE_URL='https://api.openai.com/v1'  # Default: DeepSeek")
-        log_info("   export OPENAI_MODEL='gpt-4'                        # Default: deepseek-chat")
+        log_info("   export OPENAI_API_KEY='your-api-key'")
+        log_info("   export OPENAI_BASE_URL='https://api.openai.com/v1'")
+        log_info("   export OPENAI_MODEL='gpt-4'")
         return
 
     try:

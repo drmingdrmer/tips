@@ -5,8 +5,8 @@
 ## Example
 
 ```bash
-$ export OPENAI_API_KEY=sk-xxx
-$ python bin/gh-weekly.py 周报风格: 向上管理, 情绪价值打满
+# export DEEPSEEK_API_KEY=sk-deepseek-api-key
+$ python bin/gh-weekly.py 风格: 向上管理, 情绪价值打满
 
 ✅ GitHub CLI is installed and authenticated
 🔍 Searching for commits since 2025-08-03...
@@ -19,7 +19,7 @@ $ python bin/gh-weekly.py 周报风格: 向上管理, 情绪价值打满
 📋 [3/4] Processing databend-scripts: A  clean-ignored
 📋 [4/4] Processing databend: feat(meta-service): add timing monitoring for Raft-Log IO (#18509)
 ✅ Collected commit data (4/4 detailed messages fetched)
-🤖 Generating weekly report with deepseek-chat (max 500 chars)...
+🤖 Generating weekly report using https://api.deepseek.com - deepseek-chat (max 500 chars)...
 ✅ Weekly report generated successfully!
 📏 Report length: 308 characters
 
@@ -67,20 +67,18 @@ pip install openai
    gh auth login
    ```
 
-2. **AI API 配置**（标准 OpenAI 环境变量）
+2. **AI API 配置**
    ```bash
-   # DeepSeek（默认）
+   # DeepSeek（默认）- 推荐方式
+   export DEEPSEEK_API_KEY="sk-deepseek-key"
+   
+   # DeepSeek（备用方式）
    export OPENAI_API_KEY="sk-deepseek-key"
 
-   # OpenAI
+   # 使用其他 OpenAI 兼容服务时
    export OPENAI_API_KEY="sk-openai-key"
    export OPENAI_BASE_URL="https://api.openai.com/v1"
    export OPENAI_MODEL="gpt-4"
-
-   # OpenRouter
-   export OPENAI_API_KEY="sk-or-key"
-   export OPENAI_BASE_URL="https://openrouter.ai/api/v1"
-   export OPENAI_MODEL="anthropic/claude-3.5-sonnet"
    ```
 
 ## 使用方法
@@ -146,8 +144,12 @@ pip install openai
 
 ### DeepSeek（默认）
 ```bash
-export OPENAI_API_KEY="sk-deepseek-key"
+# 推荐方式
+export DEEPSEEK_API_KEY="sk-deepseek-key"
 # 使用：https://api.deepseek.com 和 deepseek-chat 模型
+
+# 备用方式
+export OPENAI_API_KEY="sk-deepseek-key"
 ```
 
 ### OpenAI

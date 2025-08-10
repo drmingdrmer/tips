@@ -5,8 +5,8 @@ A tool for analyzing GitHub commit history and automatically generating weekly r
 ## Example
 
 ```bash
-$ export OPENAI_API_KEY=sk-xxx
-$ python bin/gh-weekly.py 周报风格: 向上管理, 情绪价值打满
+# export DEEPSEEK_API_KEY=sk-deepseek-api-key
+$ python bin/gh-weekly.py 风格: 向上管理, 情绪价值打满
 
 ✅ GitHub CLI is installed and authenticated
 🔍 Searching for commits since 2025-08-03...
@@ -19,7 +19,7 @@ $ python bin/gh-weekly.py 周报风格: 向上管理, 情绪价值打满
 📋 [3/4] Processing databend-scripts: A  clean-ignored
 📋 [4/4] Processing databend: feat(meta-service): add timing monitoring for Raft-Log IO (#18509)
 ✅ Collected commit data (4/4 detailed messages fetched)
-🤖 Generating weekly report with deepseek-chat (max 500 chars)...
+🤖 Generating weekly report using https://api.deepseek.com - deepseek-chat (max 500 chars)...
 ✅ Weekly report generated successfully!
 📏 Report length: 308 characters
 
@@ -67,20 +67,18 @@ pip install openai
    gh auth login
    ```
 
-2. **AI API Configuration** (Standard OpenAI environment variables)
+2. **AI API Configuration**
    ```bash
-   # DeepSeek (default)
+   # DeepSeek (default) - Preferred way
+   export DEEPSEEK_API_KEY="sk-deepseek-key"
+   
+   # DeepSeek (fallback)
    export OPENAI_API_KEY="sk-deepseek-key"
 
-   # OpenAI
+   # When using other OpenAI compatible providers
    export OPENAI_API_KEY="sk-openai-key"
    export OPENAI_BASE_URL="https://api.openai.com/v1"
    export OPENAI_MODEL="gpt-4"
-
-   # OpenRouter
-   export OPENAI_API_KEY="sk-or-key"
-   export OPENAI_BASE_URL="https://openrouter.ai/api/v1"
-   export OPENAI_MODEL="anthropic/claude-3.5-sonnet"
    ```
 
 ## Usage
@@ -142,12 +140,14 @@ pip install openai
 
 ## Supported AI Services
 
-The tool uses standard OpenAI environment variables and works with multiple AI services:
-
 ### DeepSeek (Default)
 ```bash
-export OPENAI_API_KEY="sk-deepseek-key"
+# Preferred way
+export DEEPSEEK_API_KEY="sk-deepseek-key"
 # Uses: https://api.deepseek.com with deepseek-chat model
+
+# Fallback way  
+export OPENAI_API_KEY="sk-deepseek-key"
 ```
 
 ### OpenAI
