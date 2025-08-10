@@ -6,7 +6,7 @@ A tool for analyzing GitHub commit history and automatically generating weekly r
 
 ```bash
 # export DEEPSEEK_API_KEY=sk-deepseek-api-key
-$ python bin/gh-weekly.py 风格: 向上管理, 情绪价值打满
+$ python gh-weekly.py 风格: 向上管理, 情绪价值打满
 
 ✅ GitHub CLI is installed and authenticated
 🔍 Searching for commits since 2025-08-03...
