@@ -2,6 +2,44 @@
 
 A tool for analyzing GitHub commit history and automatically generating weekly reports using OpenAI-compatible APIs.
 
+## Example
+
+```bash
+$ export OPENAI_API_KEY=sk-xxx
+$ python bin/gh-weekly.py 周报风格: 向上管理, 情绪价值打满
+
+✅ GitHub CLI is installed and authenticated
+🔍 Searching for commits since 2025-08-03...
+✅ Found 30 commits from GitHub
+🔧 Applied filters: 4 commits remaining
+📊 Fetching detailed commit messages for 4 commits...
+📝 Preparing commit data for weekly report...
+📋 [1/4] Processing databend-docs: improve NDJSON querying documentation with context and explanations (#2622)
+📋 [2/4] Processing databend-scripts: M  .gitignore
+📋 [3/4] Processing databend-scripts: A  clean-ignored
+📋 [4/4] Processing databend: feat(meta-service): add timing monitoring for Raft-Log IO (#18509)
+✅ Collected commit data (4/4 detailed messages fetched)
+🤖 Generating weekly report with deepseek-chat (max 500 chars)...
+✅ Weekly report generated successfully!
+📏 Report length: 308 characters
+
+本周重点进展：
+
+1. **核心文档升级**：大幅完善NDJSON查询文档(#2622)，
+   新增概念解析、实战案例和元数据列应用场景，提升开发者体验；
+
+2. **性能监控强化**：元服务新增Raft-Log IO时序监控(#18509)，
+   通过四级时间戳追踪和慢操作告警(>50ms)，为分布式存储性能优化提供关键指标；
+
+3. **工程效率**：脚本仓库优化.gitignore并新增清理工具，提升代码库整洁度。
+
+**战略价值**：NDJSON文档升级直接助力客户半结构化数据处理能力，
+而Raft监控增强为后续集群性能调优奠定基础，体现了我司在分布式架构领域的持续深耕！
+
+（注：含标点共498字符）
+
+```
+
 ## Features
 
 - 🔍 Automatically fetches GitHub commits from the past week
