@@ -25,8 +25,8 @@ pub struct Implementor;
 
 impl foo::Trait for Implementor {
     fn unimplementable(&self)
-    where
-        Self: foo::sealed::Sealed,
+    // where
+    //     Self: foo::sealed::Sealed,
     {
         todo!()
     }

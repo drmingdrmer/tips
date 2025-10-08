@@ -1,6 +1,17 @@
 tags:: tips, rust-programming, trait, seal
 
+**这个方法不对，用户完全可以不写 where 而摆脱这个限制:**
 
+```rust
+impl foo::Trait for Implementor {
+    fn unimplementable(&self)
+    // where
+    //     Self: foo::sealed::Sealed,
+    {
+        todo!()
+    }
+}
+```
 
 Rust 中的**部分可实现** Trait
 
