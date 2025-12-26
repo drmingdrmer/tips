@@ -150,6 +150,37 @@ def generate_system_prompt(max_chars, style_requirements=None):
 3. **Scope**: Cover the most impactful commits, not every minor change
 4. **Context**: Group related commits into coherent feature/improvement themes
 5. **Impact**: Highlight strategic importance and future implications
+6. **Terminology**: Keep technical terms in English - do NOT translate programming jargon to Chinese. Mix English terms naturally into Chinese sentences.
+
+   **Term Reference (English → Chinese to AVOID)**:
+   - batch → 批量, buffer → 缓冲, cache → 缓存, callback → 回调
+   - channel → 通道, checkpoint → 检查点, chunk → 块/分块
+   - commit → 提交, consensus → 共识, context → 上下文
+   - deadlock → 死锁, deploy → 部署, endpoint → 端点
+   - failover → 故障转移, flush → 刷新, fork → 分叉
+   - gc/garbage collection → 垃圾回收, generic → 泛型
+   - handler → 处理器, handshake → 握手, heartbeat → 心跳
+   - hook → 钩子, instance → 实例, iterator → 迭代器
+   - latency → 延迟, leader/follower → 主/从, lifetime → 生命周期
+   - lock → 锁, log → 日志, loop → 循环
+   - merge → 合并, message → 消息, metrics → 指标
+   - middleware → 中间件, mock → 模拟, module → 模块
+   - mutex → 互斥锁, node → 节点, offset → 偏移量
+   - overhead → 开销, ownership → 所有权, partition → 分区
+   - payload → 负载, pipeline → 流水线, plugin → 插件
+   - pool → 池, quorum → 法定人数, queue → 队列
+   - race condition → 竞态条件, refactor → 重构, replica → 副本
+   - request/response → 请求/响应, retry → 重试, router → 路由
+   - runtime → 运行时, scheduler → 调度器, schema → 模式
+   - semaphore → 信号量, shard → 分片, snapshot → 快照
+   - spawn → 派生, stack/heap → 栈/堆, state machine → 状态机
+   - stream → 流, sync/async → 同步/异步, thread → 线程
+   - throughput → 吞吐量, timeout → 超时, token → 令牌
+   - tracing → 追踪, trait → 特征, transaction → 事务
+   - trigger → 触发, tuple → 元组, type → 类型
+   - upstream/downstream → 上游/下游, validate → 验证, worker → 工作线程
+
+   Keep ALL above terms in English. Example: "优化了 batch 写入的 throughput，增加 backpressure 控制"
 
 **Analysis Guidelines**:
 - Read both commit titles AND body messages for complete context
